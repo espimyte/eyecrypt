@@ -4,20 +4,25 @@ import subprocess
 import tempfile
 
 class Algorithms():
-    ecb = ["aes-128-ecb", "aes-192-ecb", "aes-256-ecb", "aria-128-ecb", "aria-192-ecb", "aria-256-ecb", "bf-ecb","camellia-128-ecb", "camellia-192-ecb", "camellia-256-ecb", "cast5-ecb", "des-ecb", "idea-ecb", "rc2-ecb", "rc5-ecb", "seed-ecb", "sm4-ecb"]
-    cbc = ["aes-128-cbc", "aes-192-cbc", "aes-256-cbc", "aria-128-cbc", "aria-192-cbc", "aria-256-cbc", "bf-cbc", "camellia-128-cbc", "camellia-192-cbc", "camellia-256-cbc", "cast-cbc", "cast5-cbc", "des-cbc", "des-ede-cbc", "des-ede3-cbc", "idea-cbc", "rc2-40-cbc", "rc2-64-cbc", "rc2-cbc", "rc5-cbc", "seed-cbc", "sm4-cbc"]
-    cfb = ["aria-128-cfb", "aria-128-cfb1", "aria-128-cfb8", "aria-192-cfb", "aria-192-cfb1", "aria-256-cfb8", "bf-cfb", "cast5-cfb", "des-cfb", "des-ede-cfb", "des-ede3-cfb", "idea-cfb", "rc2-cfb", "rc5-cfb", "seed-cfb", "sm4-cfb"]
-    ctr = ["aria-128-ctr", "aria-192-ctr", "aria-256-ctr", "sm4-ctr"]
-    ofb = ["aria-128-ofb", "aria-192-ofb", "aria-256-ofb", "bf-ofb", "cast5-ofb", "des-ede-ofb", "des-ofb", "idea-ofb", "rc2-ofb", "rc5-ofb", "seed-ofb", "sm4-ofb"]
-    other = ["base64", "bf", "cast", "des", "des-ede", "des-ede3", "des3", "desx", "idea", "rc2", "rc4", "rc4-40", "rc5", "seed"]
+    ECB = ["aes-128-ecb", "aes-192-ecb", "aes-256-ecb", "aria-128-ecb", "aria-192-ecb", "aria-256-ecb", "bf-ecb","camellia-128-ecb", "camellia-192-ecb", "camellia-256-ecb", "cast5-ecb", "des-ecb", "idea-ecb", "rc2-ecb", "rc5-ecb", "seed-ecb", "sm4-ecb"]
+    CBC = ["aes-128-cbc", "aes-192-cbc", "aes-256-cbc", "aria-128-cbc", "aria-192-cbc", "aria-256-cbc", "bf-cbc", "camellia-128-cbc", "camellia-192-cbc", "camellia-256-cbc", "cast-cbc", "cast5-cbc", "des-cbc", "des-ede-cbc", "des-ede3-cbc", "idea-cbc", "rc2-40-cbc", "rc2-64-cbc", "rc2-cbc", "rc5-cbc", "seed-cbc", "sm4-cbc"]
+    CFB = ["aria-128-cfb", "aria-128-cfb1", "aria-128-cfb8", "aria-192-cfb", "aria-192-cfb1", "aria-256-cfb8", "bf-cfb", "cast5-cfb", "des-cfb", "des-ede-cfb", "des-ede3-cfb", "idea-cfb", "rc2-cfb", "rc5-cfb", "seed-cfb", "sm4-cfb"]
+    CTR = ["aria-128-ctr", "aria-192-ctr", "aria-256-ctr", "sm4-ctr"]
+    OFB = ["aria-128-ofb", "aria-192-ofb", "aria-256-ofb", "bf-ofb", "cast5-ofb", "des-ede-ofb", "des-ofb", "idea-ofb", "rc2-ofb", "rc5-ofb", "seed-ofb", "sm4-ofb"]
+    OTHER = ["base64", "bf", "cast", "des", "des-ede", "des-ede3", "des3", "desx", "idea", "rc2", "rc4", "rc4-40", "rc5", "seed"]
 
 class Defaults():
-    algorithm = "aes-128-ecb"
-    key = "00000000000000000000000000000000"
-    iv = "0"
+    ALGORITHM = "aes-128-ecb"
+    KEY = "00000000000000000000000000000000"
+    IV = "0"
 
-ALGORITHMS = Algorithms()
-DEFAULTS = Defaults()
+class Messages():
+    NO_MAGICK = "ImageMagick could not be found. Please install ImageMagick and/or check if you have installed it correctly."
+    NO_OPENSSL = "OpenSSL could not be found. Please install OpenSSL and/or check if you have installed it correctly."
+
+algorithms = Algorithms()
+defaults = Defaults()
+messages = Messages()
 
 def log_action(action, args):
     print("\033[94m{}\033[00m".format(action))
@@ -45,12 +50,12 @@ def generate_encrypt_command(input, output, algo, key, iv):
     Generates an encryption command given the algorithm, key, and input and output path.
     For algorithms that require an initialization value, a default value is used.
     """
-    if (algo not in ALGORITHMS.ecb):
+    if (algo not in algorithms.ECB):
         return 'openssl enc -{algo} -e -K {key} -iv {iv} -in {input} -out {output}'.format(input = input, output = output, algo = algo, key = key, iv = iv)
     else:
         return 'openssl enc -{algo} -e -K {key} -in {input} -out {output}'.format(input = input, output = output, algo = algo, key = key)
 
-def eyecrypt(input, output, algo = DEFAULTS.algorithm, key = DEFAULTS.key, iv = DEFAULTS.iv, log_action = log_action, **kwargs):
+def eyecrypt(input, output, algo = defaults.ALGORITHM, key = defaults.KEY, iv = defaults.IV, log_action = log_action, **kwargs):
     """
     Performs the process of converting and encrypting an image file given an input path, output path, key and algorithm.
     """

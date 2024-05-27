@@ -8,7 +8,8 @@ parent = os.path.dirname(current)
 sys.path.append(parent)
 
 import argparse
-from eyecrypt import DEFAULTS, eyecrypt
+from eyecrypt import defaults, messages
+from eyecrypt import check_installation, eyecrypt
 
 def print_action(action, args):
     print("\033[94m{}\033[00m".format(action))
@@ -33,10 +34,9 @@ def main():
     input_image_path = args.input
     output_image_path = args.output
 
-    # Default encryption parameters
-    algo = DEFAULTS.algorithm
-    key = DEFAULTS.key
-    iv = DEFAULTS.iv
+    algo = defaults.ALGORITHM
+    key = defaults.KEY
+    iv = defaults.IV
 
     if (args.algorithm):
         algo = args.algorithm
@@ -44,6 +44,14 @@ def main():
         key = args.key
     if args.iv:
         iv = args.iv
+
+    # Check installations
+    if (not check_installation("magick")):
+        print("\033[91m{}\033[00m" .format(messages.NO_MAGICK))
+        return
+    if (not check_installation("openssl")):
+        print("\033[91m{}\033[00m" .format(messages.NO_OPENSSL))
+        return
 
     eyecrypt(input = input_image_path, output = output_image_path, algo = algo, key = key, iv = iv, log_action = print_action)
 

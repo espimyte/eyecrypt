@@ -14,7 +14,7 @@ from tkinter import *
 from tkinter import filedialog
 from tkinter.ttk import Combobox, Style
 from PIL import Image, ImageTk
-from eyecrypt import ALGORITHMS, DEFAULTS
+from eyecrypt import algorithms, defaults, messages
 from eyecrypt import check_installation, eyecrypt
 
 SELECTOR_COLOR = '#e8e8e8'
@@ -26,11 +26,9 @@ DISPLAY_HEIGHT = 300
 DISPLAY_WIDTH = 400
 
 NO_FILE_SELECTED = "(none)"
-NO_MAGICK = "ImageMagick could not be found. Please install ImageMagick and/or check if you have installed it correctly."
-NO_OPENSSL = "OpenSSL could not be found. Please install OpenSSL and/or check if you have installed it correctly."
 ALLOWED_FILE_TYPES = "*.png *.jpg *.jpeg *.bmp *.gif *.webp *.apng"
 
-SUPPORTED_ALGORITHMS = ALGORITHMS.ecb + ALGORITHMS.cbc + ALGORITHMS.cfb + ALGORITHMS.ctr + ALGORITHMS.ofb + ALGORITHMS.other
+SUPPORTED_ALGORITHMS = algorithms.ECB + algorithms.CBC + algorithms.CFB + algorithms.CTR + algorithms.OFB + algorithms.OTHER
 TIMEOUT = 60
 
 class RaisingThread(threading.Thread):
@@ -132,11 +130,11 @@ def main():
             if (not is_valid_hex(key.get())):
                 raise Exception("Please enter a valid key.")
             if (not check_installation("magick")):
-                raise Exception(NO_MAGICK)
+                raise Exception(messages.NO_MAGICK)
             if (not check_installation("openssl")):
-                raise Exception(NO_OPENSSL)
+                raise Exception(messages.NO_OPENSSL)
 
-            thread = RaisingThread(target = eyecrypt, kwargs={'input': input.file_path, 'output': output.file_path, 'algo': algorithm.get(), 'key': key.get(), 'iv': DEFAULTS.iv, 'log_action': write_action, 'log': log})
+            thread = RaisingThread(target = eyecrypt, kwargs={'input': input.file_path, 'output': output.file_path, 'algo': algorithm.get(), 'key': key.get(), 'iv': defaults.IV, 'log_action': write_action, 'log': log})
             thread.daemon = True
             time_started = time.time()
             thread.start()
@@ -204,7 +202,7 @@ def main():
         """
         Checks whether an algorithm is an ECB algorithm. Warns the user if not.
         """
-        if algorithm.get() not in ALGORITHMS.ecb:
+        if algorithm.get() not in algorithms.ECB:
             algorithm_tooltip.configure(text="ECB algorithms are reccomended for more discernable results.", fg="orange")
         else:
             algorithm_tooltip.configure(text="")
@@ -259,7 +257,7 @@ def main():
 
     # Key selector
     key = StringVar(root)
-    key.set(DEFAULTS.key)
+    key.set(defaults.KEY)
     key_selector = Frame(options)
     key_selector.grid(column=0, row=0)
     Label(key_selector, text = "Key:").grid(column=0, row=0)
@@ -278,7 +276,7 @@ def main():
 
     # Algorithm selector
     algorithm = StringVar(root)
-    algorithm.set(DEFAULTS.algorithm)
+    algorithm.set(defaults.ALGORITHM)
     algorithm_selector = Frame(options)
     algorithm_selector.grid(column=1, row=0)
     Label(algorithm_selector, text = "Encryption Algorithm:").grid(column=0, row=0)
@@ -339,10 +337,10 @@ def main():
 
     # Warn user about missing installations
     if (not check_installation("magick")):
-        log.configure(text=NO_MAGICK, fg="red")
+        log.configure(text=messages.NO_MAGICK, fg="red")
     
     if (not check_installation("openssl")):
-        log.configure(text=NO_OPENSSL, fg="red")
+        log.configure(text=messages.NO_OPENSSL, fg="red")
 
     window.mainloop()
     return
