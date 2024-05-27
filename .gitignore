@@ -1,7 +1,8 @@
-
 /__pycache__
 /eyecrypt-cli/build
+/eyecrypt-cli/build/eyecrypt-cli
 /eyecrypt-gui/build
+/eyecrypt-gui/build/eyecrypt-gui
 eyecrypt-cli/eyecrypt-cli.spec
 eyecrypt-gui/eyecrypt-gui.spec
 /eyecrypt-cli/dist
