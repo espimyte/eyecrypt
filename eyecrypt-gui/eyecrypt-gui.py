@@ -1,5 +1,11 @@
 #!/usr/bin/env python
 
+import win32.win32gui as win32gui
+import win32.lib.win32con as win32con
+
+the_program_to_hide = win32gui.GetForegroundWindow()
+win32gui.ShowWindow(the_program_to_hide , win32con.SW_HIDE)
+
 import os
 import sys
 
@@ -31,6 +37,12 @@ ALLOWED_FILE_TYPES = "*.png *.jpg *.jpeg *.bmp *.gif *.webp *.apng"
 SUPPORTED_ALGORITHMS = algorithms.ECB + algorithms.CBC + algorithms.CFB + algorithms.CTR + algorithms.OFB + algorithms.OTHER
 TIMEOUT = 60
 
+try:
+    from ctypes import windll
+    windll.shell32.SetCurrentProcessExplicitAppUserModelID("eyecrypt")
+except ImportError:
+    pass
+
 class RaisingThread(threading.Thread):
     """
     A thread class that is capable of raising an exception that can be caught.
@@ -54,6 +66,12 @@ class ImageData:
     def __init__(self):
         self.file_path = None
         self.image = None
+
+def get_icon_path(filename):
+    if hasattr(sys, "_MEIPASS"):
+        return os.path.join(sys._MEIPASS, filename)
+    else:
+        return filename
 
 def resize(image_path, width, height):
     """
@@ -213,7 +231,7 @@ def main():
     window.title("EYECRYPT")
     window.resizable(False, False)
     try:
-        icon_path = Path(__file__).parent / 'eyecrypt-icon.ico'
+        icon_path = get_icon_path('eyecrypt-icon.ico')
         window.iconbitmap(icon_path)
     except:
         pass

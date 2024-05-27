@@ -17,8 +17,8 @@ class Defaults():
     IV = "0"
 
 class Messages():
-    NO_MAGICK = "ImageMagick could not be found. Please install ImageMagick and/or check if you have installed it correctly."
-    NO_OPENSSL = "OpenSSL could not be found. Please install OpenSSL and/or check if you have installed it correctly."
+    NO_MAGICK = "ImageMagick could not be found. Please install ImageMagick and/or check if you have it installed correctly."
+    NO_OPENSSL = "OpenSSL could not be found. Please install OpenSSL and/or check if you have it installed correctly."
 
 algorithms = Algorithms()
 defaults = Defaults()
@@ -31,7 +31,13 @@ def check_installation(program):
     """
     Returns whether or not a program is installed.
     """
-    result = subprocess.call(['which', program], stdout=subprocess.DEVNULL)
+    cmd = program
+    if (program == "openssl"):
+        cmd = "openssl help"
+    elif (program == "magick"):
+        cmd = "magick -help"
+    
+    result = subprocess.call(cmd, stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL, shell=True)
     if (result == 0):
         return True
     else:
