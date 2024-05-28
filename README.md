@@ -156,9 +156,10 @@ Note that while animated images (such as .gif) are accepted, they will not prese
 
 | Original Image  | Result | Parameters |
 | ------------- | ------------- | ------------- |
-| ![](https://github.com/espimyte/eyecrypt/blob/main/assets/example.png?raw=true)  | ![](https://github.com/espimyte/eyecrypt/blob/main/assets/example-result9.png?raw=true)   | **Algorithm:**<br>aes-128-ecb<br><br>**Key:**<br>e19a290213711f4244dc6c66b9767099<br>|
-| ![](https://github.com/espimyte/eyecrypt/blob/main/assets/vacuum.png?raw=true)  | ![](https://github.com/espimyte/eyecrypt/blob/main/assets/vacuum-result.png?raw=true)   | **Algorithm:**<br> des-ede<br><br>**Key:**<br>3299d0c42940bd851c7ab03f3e7f7637<br>|
+| ![](https://github.com/espimyte/eyecrypt/blob/main/assets/example.png?raw=true)  | ![](https://github.com/espimyte/eyecrypt/blob/main/assets/example-result10.png?raw=true)   | **Algorithm:**<br>aes-128-ecb<br><br>**Key:**<br>7c221e585bcfba398c303b59ebc29331<br>|
+| ![](https://github.com/espimyte/eyecrypt/blob/main/assets/example.png?raw=true)  | ![](https://github.com/espimyte/eyecrypt/blob/main/assets/example-result5.png?raw=true)   | **Algorithm:**<br>des-ede<br><br>**Key:**<br>49c94498ada5a0b04f926d8aa76da972<br>|
 | ![](https://github.com/espimyte/eyecrypt/blob/main/assets/rearranger.png?raw=true)  | ![](https://github.com/espimyte/eyecrypt/blob/main/assets/rearranger-result.png?raw=true)   | **Algorithm:**<br> camellia-128-ecb<br><br>**Key:**<br>4ce44843bb9db8ae671708125435628f<br>|
+| ![](https://github.com/espimyte/eyecrypt/blob/main/assets/vacuum.png?raw=true)  | ![](https://github.com/espimyte/eyecrypt/blob/main/assets/vacuum-result.png?raw=true)   | **Algorithm:**<br> des-ede<br><br>**Key:**<br>3299d0c42940bd851c7ab03f3e7f7637<br>|
 | ![](https://github.com/espimyte/eyecrypt/blob/main/assets/izzy.png?raw=true)  | ![](https://github.com/espimyte/eyecrypt/blob/main/assets/izzy-result.png?raw=true)   | **Algorithm:**<br>aria-256-ecb<br><br>**Key:**<br> ff9ecd0e5a3865c4df8c40afef0bfbc1<br>|
 
 
@@ -174,7 +175,7 @@ To view this metadata, type the following into the terminal:
 ```
 magick identify -format %c "your-image.png"
 ```
-Please not that there is no guarantee that this metadata is preserved if the image is modified in anyway. If you wish to store the parameters you used to encrypt an image, it is reccomended that you store it elsewhere yourself and do not rely on the metadata.
+Please note that there is no guarantee that this metadata is preserved if the image is modified in anyway. If you wish to store the parameters you used to encrypt an image, it is reccomended that you store it elsewhere yourself and do not rely on the metadata.
 
 ## IMAGE LICENSE
 While I reserve rights to the program itself, I reserve no rights to any images produced by this program. 
