@@ -27,13 +27,16 @@ WARNING_COLOR = '#ff8f4a'
 ERROR_COLOR = 'red'
 SUCCESS_COLOR = 'green'
 PREVIEW_BACKGROUND_COLOR = '#dbdbdb'
+
 DISPLAY_HEIGHT = 300
 DISPLAY_WIDTH = 400
 
 NO_FILE_SELECTED = "(none)"
-ALLOWED_FILE_TYPES = "*.png *.jpg *.jpeg *.bmp *.gif *.webp *.apng"
 
+LOAD_FILE_TYPES = [("Image Files", "*.png *.jpg *.jpeg *.bmp *.gif *.webp *.apng")]
+SAVE_FILE_TYPES = [("PNG", "*.png"), ("JPG", "*.jpg"), ("JPEG", ".jpeg"), ("BMP, *.bmp"), ("BMP, *.bmp"), ("GIF", ".gif"), ("WEBP", "*.webp"), ("APNG", "*.apng")]
 SUPPORTED_ALGORITHMS = algorithms.ECB + algorithms.CBC + algorithms.CFB + algorithms.CTR + algorithms.OFB + algorithms.OTHER
+
 TIMEOUT = 60
 
 try:
@@ -182,7 +185,7 @@ def main():
         """
         Promps the user to provide an file to use as input.
         """
-        input.file_path = filedialog.askopenfilename(filetypes=[("Image Files", ALLOWED_FILE_TYPES)])
+        input.file_path = filedialog.askopenfilename(filetypes=LOAD_FILE_TYPES)
 
         if (not input.file_path):
             input_button.configure(text=NO_FILE_SELECTED)
@@ -195,7 +198,7 @@ def main():
         """
         Promps the user to provide an file to save the output to.
         """
-        output.file_path = filedialog.asksaveasfilename(filetypes=[("Image Files", ALLOWED_FILE_TYPES)])
+        output.file_path = filedialog.asksaveasfilename(filetypes=SAVE_FILE_TYPES, defaultextension="*.*")
 
         if (not output.file_path):
             output_button.configure(text=NO_FILE_SELECTED)
