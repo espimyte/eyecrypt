@@ -3,8 +3,8 @@
 import win32.win32gui as win32gui
 import win32.lib.win32con as win32con
 
-console_window = win32gui.GetForegroundWindow()
-win32gui.ShowWindow(console_window , win32con.SW_HIDE)
+# console_window = win32gui.GetForegroundWindow()
+# win32gui.ShowWindow(console_window , win32con.SW_HIDE)
 
 import os
 import sys
@@ -78,12 +78,16 @@ def resize(image_path, width, height):
     This function maintains the aspect ratio of the image, and does not stretch it.
     """
     image = Image.open(image_path)
+
     if (image.height >= image.width):
         image = image.resize((int(image.width*(height/image.height)),height))
     else:
         image = image.resize((width,int(image.height*(width/image.width))))
-    image = ImageTk.PhotoImage(image)
-    return image
+
+    if (image.height > height):
+        image = image.resize((int(image.width*(height/image.height)),height))
+    
+    return ImageTk.PhotoImage(image)
 
 def set_display(label, display, data):
     """
