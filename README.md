@@ -1,5 +1,5 @@
 # EYECRYPT
-![](https://raw.githubusercontent.com/espimyte/eyecrypt/main/assets/eyecrypt-icon.png?token=GHSAT0AAAAAACSVKYPWXUWECR5ZZECU2LGWZSVWWIQ)
+![](https://github.com/espimyte/eyecrypt/blob/main/assets/eyecrypt-icon.png?raw=true)
 
 A tool that visualizes encryption in images.
 
@@ -85,10 +85,13 @@ openssl version
 ```
 If you see version information about OpenSSL, the program is properly installed.
 
+After ImageMagick and OpenSSL are installed, you can run `EYECRYPT.exe`!
+
 ## USAGE
 Two versions of EYECRYPT are provided, a GUI version, and a CLI version.
 
 ### GUI
+<img src="https://github.com/espimyte/eyecrypt/blob/main/assets/eyecrypt-icon.png?raw=true" style="width: 50px; image-rendering: pixelated"></img>
 
 The GUI (graphical user interface) version can be considered the "main" and reccomended version of EYECRYPT.
 
@@ -100,6 +103,7 @@ It is intended to be user friendly and not require the user to fiddle with the c
 > It is reccomended to use smaller, high contrast images if you wish to see more discernable results. Photos, large images, and/or images with a lot of noise tend to produce more obfuscated results.
 
 ### CLI
+<img src="https://github.com/espimyte/eyecrypt/blob/main/assets/eyecrypt-cli-icon.png?raw=true" style="width: 50px; image-rendering: pixelated"></img>
 
 The CLI (command line interface) version is a version designed for the command line. 
 
