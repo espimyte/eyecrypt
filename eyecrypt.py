@@ -33,9 +33,9 @@ def check_installation(program):
     """
     cmd = program
     if (program == "openssl"):
-        cmd = "openssl help"
+        cmd = "openssl version"
     elif (program == "magick"):
-        cmd = "magick -help"
+        cmd = "magick -version"
     
     result = subprocess.call(cmd, stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL, shell=True)
     if (result == 0):
