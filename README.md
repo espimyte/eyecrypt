@@ -1,5 +1,3 @@
-
-
 # EYECRYPT
 ![](https://raw.githubusercontent.com/espimyte/eyecrypt/main/eyecrypt-icon.ico?token=GHSAT0AAAAAACSVKYPWSVKD2DTWWO63BJSGZSVTXXA)
 
@@ -18,6 +16,8 @@ A tool that visualizes encryption in images.
 - [SUPPORTED FILE TYPES](#SUPPORTED-FILE-TYPES)
 - [EXAMPLES](#EXAMPLES)
 - [ADDITIONAL NOTES](#ADDITIONAL-NOTES)
+  - [Compability](#Compability)
+  - [Metadata](#Metadata) 
 - [IMAGE LICENSE](#IMAGE-LICENSE)
 
 ## OVERVIEW
@@ -88,6 +88,9 @@ If you see version information about OpenSSL, the program is properly installed.
 ## USAGE
 Two versions of EYECRYPT are provided, a GUI version, and a CLI version.
 
+> [!IMPORTANT]  
+> It is reccomended to use smaller, high contrast images if you wish to see more discernable results.
+
 ### GUI
 
 The GUI (graphical user interface) version can be considered the "main" and reccomended version of EYECRYPT.
@@ -149,6 +152,10 @@ TBA
 
 ## ADDITIONAL NOTES
 
+### Compability
+This program has only been tested on Windows. I cannot guarantee that it works on other operating systems.
+
+### Metadata
 EYECRYPT stores the resulting algorithm, key, and iv (if applicable) in the metadata of the output image.
 
 To view this metadata, type the following into the terminal:
@@ -156,8 +163,6 @@ To view this metadata, type the following into the terminal:
 magick identify -format %c "your-image.png"
 ```
 Please not that there is no guarantee that this metadata is preserved if the image is modified in anyway. If you wish to store the parameters you used to encrypt an image, it is reccomended that you store it elsewhere yourself and do not rely on the metadata.
-
-This program has only been tested on Windows. I cannot guarantee that it works on other operating systems.
 
 ## IMAGE LICENSE
 While I reserve rights to the program itself, I reserve no rights to any images produced by this program. 
