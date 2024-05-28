@@ -7,3 +7,4 @@ eyecrypt-cli/eyecrypt-cli.spec
 eyecrypt-gui/eyecrypt-gui.spec
 /eyecrypt-cli/dist
 /eyecrypt-gui/dist
+assets/parameters.txt
