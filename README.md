@@ -150,6 +150,8 @@ With the CLI, you will not be stopped when trying to use unsupported algorithms 
 - WEBP (.webp)
 - APNG (.apng)
 
+Note that while animated images (such as .gif) are accepted, they will not preserve their animation after the process.
+
 ## EXAMPLES
 TBA
 
