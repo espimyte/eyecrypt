@@ -3,8 +3,8 @@
 import win32.win32gui as win32gui
 import win32.lib.win32con as win32con
 
-the_program_to_hide = win32gui.GetForegroundWindow()
-win32gui.ShowWindow(the_program_to_hide , win32con.SW_HIDE)
+console_window = win32gui.GetForegroundWindow()
+win32gui.ShowWindow(console_window , win32con.SW_HIDE)
 
 import os
 import sys
@@ -13,7 +13,6 @@ current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)
 sys.path.append(parent)
 
-from pathlib import Path
 import threading
 import time
 from tkinter import *
