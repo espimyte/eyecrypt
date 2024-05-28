@@ -3,8 +3,8 @@
 import win32.win32gui as win32gui
 import win32.lib.win32con as win32con
 
-# console_window = win32gui.GetForegroundWindow()
-# win32gui.ShowWindow(console_window , win32con.SW_HIDE)
+console_window = win32gui.GetForegroundWindow()
+win32gui.ShowWindow(console_window , win32con.SW_HIDE)
 
 import os
 import sys
