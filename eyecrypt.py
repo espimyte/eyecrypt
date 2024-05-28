@@ -101,7 +101,7 @@ def eyecrypt(input, output, algo = defaults.ALGORITHM, key = defaults.KEY, iv = 
     output_cmd = 'magick -define bmp:ignore-filesize=true {input} {output}'.format(input = encrypted_image_path, output = output_image_path)
     call_subprocess(output_cmd, "Something went wrong while generating the output image.")
 
-    # Writing metadata to image
+    # Logging parameters to image
     log_action(action ="Logging parameters to image...", args = kwargs)
     metadata_cmd = 'magick convert {input} -set comment \"Made with EYECRYPT (algorithm: {algo}, key: {key}, iv: {iv})\" {output}'.format(input = output_image_path, output = output_image_path, algo = algo, key = key, iv = iv)
     call_subprocess(metadata_cmd, "Something went wrong while logging parameters to the image.")
