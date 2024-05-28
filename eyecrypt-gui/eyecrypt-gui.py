@@ -1,13 +1,18 @@
 #!/usr/bin/env python
 
+import os
+import sys
+import win32process
 import win32.win32gui as win32gui
 import win32.lib.win32con as win32con
 
 console_window = win32gui.GetForegroundWindow()
-win32gui.ShowWindow(console_window , win32con.SW_HIDE)
+focus_window_pid = win32process.GetWindowThreadProcessId(console_window)[1]
+current_process_pid = os.getppid()
 
-import os
-import sys
+if focus_window_pid == current_process_pid:
+    win32gui.ShowWindow(console_window , win32con.SW_HIDE)
+    pass
 
 current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)
@@ -34,7 +39,7 @@ DISPLAY_WIDTH = 400
 NO_FILE_SELECTED = "(none)"
 
 LOAD_FILE_TYPES = [("Image Files", "*.png *.jpg *.jpeg *.bmp *.gif *.webp *.apng")]
-SAVE_FILE_TYPES = [("PNG", "*.png"), ("JPG", "*.jpg"), ("JPEG", ".jpeg"), ("BMP, *.bmp"), ("BMP, *.bmp"), ("GIF", ".gif"), ("WEBP", "*.webp"), ("APNG", "*.apng")]
+SAVE_FILE_TYPES = [("Image Files", "*.png *.jpg *.jpeg *.bmp *.gif *.webp *.apng"), ("PNG", "*.png"), ("JPG", "*.jpg"), ("JPEG", ".jpeg"), ("BMP, *.bmp"), ("BMP, *.bmp"), ("GIF", ".gif"), ("WEBP", "*.webp"), ("APNG", "*.apng")]
 SUPPORTED_ALGORITHMS = algorithms.ECB + algorithms.CBC + algorithms.CFB + algorithms.CTR + algorithms.OFB + algorithms.OTHER
 
 TIMEOUT = 60
