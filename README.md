@@ -1,5 +1,5 @@
 # EYECRYPT
-![](https://raw.githubusercontent.com/espimyte/eyecrypt/main/eyecrypt-icon.ico?token=GHSAT0AAAAAACSVKYPWSVKD2DTWWO63BJSGZSVTXXA)
+![](https://raw.githubusercontent.com/espimyte/eyecrypt/main/assets/eyecrypt-icon.png?token=GHSAT0AAAAAACSVKYPWXUWECR5ZZECU2LGWZSVWWIQ)
 
 A tool that visualizes encryption in images.
 
@@ -37,7 +37,7 @@ You can learn more yourself [here](https://words.filippo.io/the-ecb-penguin/) an
 
 Below is an image that I created to help me remember the process.
 
-![](https://github.com/espimyte/eyecrypt/blob/main/process.png?raw=true)
+![](https://github.com/espimyte/eyecrypt/blob/main/assets/process.png?raw=true)
 
 Of course, I was estatic about the result. I wanted to see more! 
 
@@ -94,7 +94,7 @@ The GUI (graphical user interface) version can be considered the "main" and recc
 
 It is intended to be user friendly and not require the user to fiddle with the command line.
 
-![](https://github.com/espimyte/eyecrypt/blob/main/eyecrypt-demo.gif?raw=true)
+![](https://github.com/espimyte/eyecrypt/blob/main/assets/eyecrypt-demo.gif?raw=true)
 
 > [!IMPORTANT]  
 > It is reccomended to use smaller, high contrast images if you wish to see more discernable results. Photos, large images, and/or images with a lot of noise tend to produce more obfuscated results.
@@ -153,7 +153,14 @@ With the CLI, you will not be stopped when trying to use unsupported algorithms 
 Note that while animated images (such as .gif) are accepted, they will not preserve their animation after the process.
 
 ## EXAMPLES
-TBA
+
+| Original Image  | Result | Parameters |
+| ------------- | ------------- | ------------- |
+| ![](https://github.com/espimyte/eyecrypt/blob/main/assets/example.png?raw=true)  | ![](https://github.com/espimyte/eyecrypt/blob/main/assets/example-result5.png?raw=true)   | **Algorithm:**<br>des-ede<br><br>**Key:**<br>49c94498ada5a0b04f926d8aa76da972<br>|
+| ![](https://github.com/espimyte/eyecrypt/blob/main/assets/vacuum.png?raw=true)  | ![](https://github.com/espimyte/eyecrypt/blob/main/assets/vacuum-result.png?raw=true)   | **Algorithm:**<br> des-ede<br><br>**Key:**<br>3299d0c42940bd851c7ab03f3e7f7637<br>|
+| ![](https://github.com/espimyte/eyecrypt/blob/main/assets/rearranger.png?raw=true)  | ![](https://github.com/espimyte/eyecrypt/blob/main/assets/rearranger-result.png?raw=true)   | **Algorithm:**<br> camellia-128-ecb<br><br>**Key:**<br>4ce44843bb9db8ae671708125435628f<br>|
+| ![](https://github.com/espimyte/eyecrypt/blob/main/assets/izzy.png?raw=true)  | ![](https://github.com/espimyte/eyecrypt/blob/main/assets/izzy-result.png?raw=true)   | **Algorithm:**<br>aria-256-ecb<br><br>**Key:**<br> ff9ecd0e5a3865c4df8c40afef0bfbc1<br>|
+
 
 ## ADDITIONAL NOTES
 
