@@ -97,7 +97,7 @@ It is intended to be user friendly and not require the user to fiddle with the c
 ![](https://github.com/espimyte/eyecrypt/blob/main/eyecrypt-demo.gif?raw=true)
 
 > [!IMPORTANT]  
-> It is reccomended to use smaller, high contrast images if you wish to see more discernable results. Photos and/or large images tend to produce more obfuscated results.
+> It is reccomended to use smaller, high contrast images if you wish to see more discernable results. Photos, large images, and/or images with a lot of noise tend to produce more obfuscated results.
 
 ### CLI
 
