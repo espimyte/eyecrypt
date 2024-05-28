@@ -157,6 +157,8 @@ magick identify -format %c "your-image.png"
 ```
 Please not that there is no guarantee that this metadata is preserved if the image is modified in anyway. If you wish to store the parameters you used to encrypt an image, it is reccomended that you store it elsewhere yourself and do not rely on the metadata.
 
+This program has only been tested on Windows. I cannot guarantee that it works on other operating systems.
+
 ## IMAGE LICENSE
 While I reserve rights to the program itself, I reserve no rights to any images produced by this program. 
 You are welcome to use any images produced by this program freely for any projects, personal or commercial, no attribution or permission required.
