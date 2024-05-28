@@ -1,6 +1,8 @@
-![](https://raw.githubusercontent.com/espimyte/eyecrypt/main/eyecrypt-icon.ico?token=GHSAT0AAAAAACSVKYPWSVKD2DTWWO63BJSGZSVTXXA)
+
 
 # EYECRYPT
+![](https://raw.githubusercontent.com/espimyte/eyecrypt/main/eyecrypt-icon.ico?token=GHSAT0AAAAAACSVKYPWSVKD2DTWWO63BJSGZSVTXXA)
+
 A tool that visualizes encryption in images.
 
 ## Table of Contents
@@ -39,13 +41,9 @@ Below is an image that I created to help me remember the process.
 
 Of course, I was estatic about the result. I wanted to see more! 
 
-Unfortunately, performing this process for each image was rather tedius, and I sought a tool online that could perform this for me. 
+Unfortunately, performing this process for each image was rather tedious and I was very lazy. So, I sought a tool online that could perform this for me, to no success.
 
-Unfortunately, I couldn't find one.
-
-In addition, there was the issue of different file types. Injecting a BMP header will not work for images that are not BMP. 
-
-That means either injecting a different header for each image type, or converting each image to BMP. 
+In addition, there was the issue of different file types. Injecting a BMP header will not work for images that are not BMP. That means either injecting a different header for each image type, or converting each image to BMP. 
 
 Another process that, while simple, can add up to be very tedious over several images.
 
