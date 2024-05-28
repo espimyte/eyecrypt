@@ -88,9 +88,6 @@ If you see version information about OpenSSL, the program is properly installed.
 ## USAGE
 Two versions of EYECRYPT are provided, a GUI version, and a CLI version.
 
-> [!IMPORTANT]  
-> It is reccomended to use smaller, high contrast images if you wish to see more discernable results.
-
 ### GUI
 
 The GUI (graphical user interface) version can be considered the "main" and reccomended version of EYECRYPT.
@@ -98,6 +95,9 @@ The GUI (graphical user interface) version can be considered the "main" and recc
 It is intended to be user friendly and not require the user to fiddle with the command line.
 
 ![](https://github.com/espimyte/eyecrypt/blob/main/eyecrypt-demo.gif?raw=true)
+
+> [!IMPORTANT]  
+> It is reccomended to use smaller, high contrast images if you wish to see more discernable results.
 
 ### CLI
 
@@ -136,6 +136,9 @@ With the CLI, you will not be stopped when trying to use unsupported algorithms 
 **OFB** = aria-128-ofb, aria-192-ofb, aria-256-ofb, bf-ofb, cast5-ofb, des-ede-ofb, des-ofb, idea-ofb, rc2-ofb, rc5-ofb, seed-ofb, sm4-ofb
 
 **OTHER** = base64, bf, cast, des, des-ede, des-ede3, des3, desx, idea, rc2, rc4, rc4-40, rc5, seed
+
+> [!NOTE]  
+> Some algorithms which are considered "legacy" may not work (for example, algorithms containing 'des'), depending on your machine.
 
 ## SUPPORTED FILE TYPES
 - PNG (.png)
