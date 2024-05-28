@@ -4,9 +4,9 @@ A tool that visualizes encryption in images.
 ## Table of Contents
 - [OVERVIEW](#OVERVIEW)
 - [INSTALLATION](#INSTALLATION)
-  - [Verifying your installation](#Verifying_your_installation)
+  - [Verifying your installation](#Verifying-your-installation)
 - [USAGE](#USAGE)
-- [IMAGE LICENSE](#IMAGE_LICENSE)
+- [IMAGE LICENSE](#IMAGE-LICENSE)
 
 ## OVERVIEW
 N/A
