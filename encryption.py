@@ -27,6 +27,8 @@ class Encryption():
     "bf-ecb": {'algorithm': algorithms.Blowfish, 'block_size': algorithms.Blowfish.block_size, 'mode': Mode.ECB},
     "idea-ecb": {'algorithm': algorithms.IDEA, 'key_size': 128, 'block_size': algorithms.IDEA.block_size, 'mode': Mode.ECB},
     "des3-64-ecb": {'algorithm': algorithms.TripleDES, 'key_size': 64, 'block_size': algorithms.TripleDES.block_size, 'mode': Mode.ECB},
+    "des3-128-ecb": {'algorithm': algorithms.TripleDES, 'key_size': 128, 'block_size': algorithms.TripleDES.block_size, 'mode': Mode.ECB},
+    "des3-192-ecb": {'algorithm': algorithms.TripleDES, 'key_size': 192, 'block_size': algorithms.TripleDES.block_size, 'mode': Mode.ECB},
 
     "aes-128-cbc": {'algorithm': algorithms.AES128, 'key_size': algorithms.AES128.key_size, 'block_size': algorithms.AES128.block_size, 'mode': Mode.CBC},
     "aes-192-cbc": {'algorithm': algorithms.AES, 'key_size': 192, 'block_size': algorithms.AES.block_size, 'mode': Mode.CBC},
@@ -40,6 +42,8 @@ class Encryption():
     "bf-cbc": {'algorithm': algorithms.Blowfish, 'block_size': algorithms.Blowfish.block_size, 'mode': Mode.CBC},
     "idea-cbc": {'algorithm': algorithms.IDEA, 'key_size': 128, 'block_size': algorithms.IDEA.block_size, 'mode': Mode.CBC},
     "des3-64-cbc": {'algorithm': algorithms.TripleDES, 'key_size': 64, 'block_size': algorithms.TripleDES.block_size, 'mode': Mode.CBC},
+    "des3-128-cbc": {'algorithm': algorithms.TripleDES, 'key_size': 128, 'block_size': algorithms.TripleDES.block_size, 'mode': Mode.CBC},
+    "des3-192-cbc": {'algorithm': algorithms.TripleDES, 'key_size': 192, 'block_size': algorithms.TripleDES.block_size, 'mode': Mode.CBC},
 
     "aes-128-ctr": {'algorithm': algorithms.AES128, 'key_size': algorithms.AES128.key_size, 'block_size': algorithms.AES128.block_size, 'mode': Mode.CTR},
     "aes-192-ctr": {'algorithm': algorithms.AES, 'key_size': 192, 'block_size': algorithms.AES.block_size, 'mode': Mode.CTR},
@@ -61,6 +65,8 @@ class Encryption():
     "bf-ofb": {'algorithm': algorithms.Blowfish, 'block_size': algorithms.Blowfish.block_size, 'mode': Mode.OFB},
     "idea-ofb": {'algorithm': algorithms.IDEA, 'key_size': 128, 'block_size': algorithms.IDEA.block_size, 'mode': Mode.OFB},
     "des3-64-ofb": {'algorithm': algorithms.TripleDES, 'key_size': 64, 'block_size': algorithms.TripleDES.block_size, 'mode': Mode.OFB},
+    "des3-128-ofb": {'algorithm': algorithms.TripleDES, 'key_size': 128, 'block_size': algorithms.TripleDES.block_size, 'mode': Mode.OFB},
+    "des3-192-ofb": {'algorithm': algorithms.TripleDES, 'key_size': 192, 'block_size': algorithms.TripleDES.block_size, 'mode': Mode.OFB},
 
     "aes-128-cfb": {'algorithm': algorithms.AES128, 'key_size': algorithms.AES128.key_size, 'block_size': algorithms.AES128.block_size, 'mode': Mode.CFB},
     "aes-192-cfb": {'algorithm': algorithms.AES, 'key_size': 192, 'block_size': algorithms.AES.block_size, 'mode': Mode.CFB},
@@ -74,8 +80,16 @@ class Encryption():
     "bf-cfb": {'algorithm': algorithms.Blowfish, 'block_size': algorithms.Blowfish.block_size, 'mode': Mode.CFB},
     "idea-cfb": {'algorithm': algorithms.IDEA, 'key_size': 128, 'block_size': algorithms.IDEA.block_size, 'mode': Mode.CFB},
     "des3-64-cfb": {'algorithm': algorithms.TripleDES, 'key_size': 64, 'block_size': algorithms.TripleDES.block_size, 'mode': Mode.CFB},
+    "des3-128-cfb": {'algorithm': algorithms.TripleDES, 'key_size': 128, 'block_size': algorithms.TripleDES.block_size, 'mode': Mode.CFB},
+    "des3-192-cfb": {'algorithm': algorithms.TripleDES, 'key_size': 192, 'block_size': algorithms.TripleDES.block_size, 'mode': Mode.CFB},
 
+    "rc4-40": {'algorithm': algorithms.ARC4, 'key_size': 40, 'mode': Mode.NONE},
+    "rc4-56": {'algorithm': algorithms.ARC4, 'key_size': 56, 'mode': Mode.NONE},
+    "rc4-64": {'algorithm': algorithms.ARC4, 'key_size': 64, 'mode': Mode.NONE},
+    "rc4-80": {'algorithm': algorithms.ARC4, 'key_size': 80, 'mode': Mode.NONE},
     "rc4-128": {'algorithm': algorithms.ARC4, 'key_size': 128, 'mode': Mode.NONE},
+    "rc4-192": {'algorithm': algorithms.ARC4, 'key_size': 192, 'mode': Mode.NONE},
+    "rc4-256": {'algorithm': algorithms.ARC4, 'key_size': 256, 'mode': Mode.NONE},
     }
 
 class Defaults():
