@@ -2,6 +2,8 @@
 
 import subprocess
 import tempfile
+from PIL import Image
+import piexif
 
 class Algorithms():
     ECB = ["aes-128-ecb", "aes-192-ecb", "aes-256-ecb", "aria-128-ecb", "aria-192-ecb", "aria-256-ecb", "bf-ecb","camellia-128-ecb", "camellia-192-ecb", "camellia-256-ecb", "cast5-ecb", "des-ecb", "idea-ecb", "rc2-ecb", "rc5-ecb", "seed-ecb", "sm4-ecb"]
@@ -66,8 +68,8 @@ def eyecrypt(input, output, algo = defaults.ALGORITHM, key = defaults.KEY, iv = 
     Performs the process of converting and encrypting an image file given an input path, output path, key and algorithm.
     """
     
-    input_image_path = "\""+input+"\""
-    output_image_path = "\""+output+"\""
+    input_image_path = input
+    output_image_path = output
 
     # Generate temporary directory to store temp files in
     log_action(action = "Creating temp files...", args = kwargs)
@@ -77,8 +79,11 @@ def eyecrypt(input, output, algo = defaults.ALGORITHM, key = defaults.KEY, iv = 
 
     # Convert image to bmp
     log_action(action = "Converting image to bmp...", args = kwargs)
-    convert_cmd = 'magick {input} {output}'.format(input = input_image_path, output = converted_image_path)
-    call_subprocess(convert_cmd, "Something went wrong while converting the image.")
+    try:
+        converted = Image.open(input_image_path)
+        converted.save(converted_image_path)
+    except:
+        raise Exception("Something went wrong while converting the image.")
 
     # Encrypt converted image
     log_action(action ="Encrypting converted image...", args = kwargs)
@@ -98,10 +103,12 @@ def eyecrypt(input, output, algo = defaults.ALGORITHM, key = defaults.KEY, iv = 
 
     # Generate output image
     log_action(action = "Generating output image...", args = kwargs)
-    output_cmd = 'magick -define bmp:ignore-filesize=true {input} {output}'.format(input = encrypted_image_path, output = output_image_path)
-    call_subprocess(output_cmd, "Something went wrong while generating the output image.")
+    try:
+        exif_ifd = {piexif.ExifIFD.UserComment: 'Made with EYECRYPT (algorithm: {algo}, key: {key}, iv: {iv})'.format(input = output_image_path, output = output_image_path, algo = algo, key = key, iv = iv).encode()}
+        exif_dict = {"Exif": exif_ifd}
+        exif_dat = piexif.dump(exif_dict)
 
-    # Logging parameters to image
-    log_action(action ="Logging parameters to image...", args = kwargs)
-    metadata_cmd = 'magick convert {input} -set comment \"Made with EYECRYPT (algorithm: {algo}, key: {key}, iv: {iv})\" {output}'.format(input = output_image_path, output = output_image_path, algo = algo, key = key, iv = iv)
-    call_subprocess(metadata_cmd, "Something went wrong while logging parameters to the image.")
+        encrypted = Image.open(encrypted_image_path)
+        encrypted.save(output_image_path,  exif=exif_dat)
+    except:
+        raise Exception("Something went wrong while generating the output image.")

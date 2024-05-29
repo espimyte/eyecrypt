@@ -44,12 +44,6 @@ SUPPORTED_ALGORITHMS = algorithms.ECB + algorithms.CBC + algorithms.CFB + algori
 
 TIMEOUT = 60
 
-try:
-    from ctypes import windll
-    windll.shell32.SetCurrentProcessExplicitAppUserModelID("eyecrypt")
-except ImportError:
-    pass
-
 class RaisingThread(threading.Thread):
     """
     A thread class that is capable of raising an exception that can be caught.
@@ -363,10 +357,6 @@ def main():
     # LOG
     log = Label(root, text="")
     log.grid(column=0, row=4, pady=(0,5))
-
-    # Warn user about missing installations
-    if (not check_installation("magick")):
-        log.configure(text=messages.NO_MAGICK, fg="red")
     
     if (not check_installation("openssl")):
         log.configure(text=messages.NO_OPENSSL, fg="red")
