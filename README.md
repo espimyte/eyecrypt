@@ -8,7 +8,6 @@ A tool that visualizes encryption in images.
   - [Background](#Background)
   - [Synopsis](#Synopsis) 
 - [INSTALLATION](#INSTALLATION)
-  - [Verifying your installation](#Verifying-your-installation)
 - [USAGE](#USAGE)
   - [GUI](#GUI)
   - [CLI](#CLI)
@@ -17,8 +16,8 @@ A tool that visualizes encryption in images.
 - [EXAMPLES](#EXAMPLES)
 - [ADDITIONAL NOTES](#ADDITIONAL-NOTES)
   - [Compability](#Compability)
-  - [Metadata](#Metadata) 
-- [IMAGE LICENSE](#IMAGE-LICENSE)
+  - [Metadata](#Metadata)
+  - [Image Usage](#Image-Usage)
 
 ## OVERVIEW
 
@@ -59,8 +58,6 @@ It also has a feature that allows one to randomize a key, allowing one to quickl
 
 An image can be encrypted and visualized quickly, without having to convert the images manually, or poke around with the bytes of a file. 
 
-EYECRYPT also supports almost all of the cipher methods that OpenSSL offers, from ECB to CBC, and more!
-
 The intention of this program is not only to expedite the process, but to introduce this effect to others who may not be as knowledgeable in modes of encryption, and allow others to experiment with images and encryption themselves.
 
 I think the effect that this encryption method performs on images is very beautiful, and I want to share this beauty with others. I hope you can find it as fascinating and wonderful as I do.
@@ -68,24 +65,7 @@ I think the effect that this encryption method performs on images is very beauti
 While this ECB encryption method may be "faulty" and "insecure", perhaps it is true that flaws are what make us beautiful.
 
 ## INSTALLATION
-This program requires both [ImageMagick](https://imagemagick.org/script/download.php) and [OpenSSL](https://wiki.openssl.org/index.php/Binaries) to be installed on your device to function.
-
-They can be downloaded from the links above. Follow the corresponding instructions to install the program.
-
-### Verifying your installation
-To check if ImageMagick is properly installed for this program, type the following into any terminal:
-```
-magick -version
-```
-If you see version information about ImageMagick, the program is properly installed.
-<br></br>
-To check if OpenSSL is properly installed for this program, type the following into any terminal:
-```
-openssl version
-```
-If you see version information about OpenSSL, the program is properly installed.
-
-After ImageMagick and OpenSSL are installed, you can run `EYECRYPT.exe`!
+Simply run `EYECRYPT.exe`! No external installations required.
 
 ## USAGE
 Two versions of EYECRYPT are provided, a GUI version, and a CLI version.
@@ -111,7 +91,7 @@ This is an option provided for users that for any reason would require/prefer th
 
 The CLI version of EYECRYPT can simply be ran by calling the path to the `eyecrypt.exe` file from the command line.
 
-If you wish to be able to call EYECRYPT from anywhere, you can add the folder that contains the `eyecrypt.exe` file to your `PATH`, and if done successfuly, you should be able to run the program from anywhere using `eyecrypt`.
+If you wish to be able to call EYECRYPT from anywhere, you can add the folder that contains the `eyecrypt.exe` file to your `PATH`. If done successfuly, you should be able to run the program from anywhere using `eyecrypt`.
 
 You may require a system restart after adding the program to the path before using it.
 
@@ -123,38 +103,29 @@ $ eyecrypt -in "input.png" -out "output.jpg" -algo camellia-128-ecb
 $ eyecrypt -in "input.png" -out "output.jpg" -algo cast5-ecb -key FFD1DC
 $ eyecrypt -in "input.png" -out "output.jpg" -algo aria-128-cfb -iv 111 -key ffa
 ```
-By default, EYECRYPT uses `aes-128-ecb`, with key `0x00000000000000000000000000000000`, and an IV (initialization value) of `0` (if applicable).
-
-With the CLI, you will not be stopped when trying to use unsupported algorithms or file types. I cannot guarantee that will work, though I will not stop you from trying!
+By default, EYECRYPT uses `aes-128-ecb`, with key `0x00000000000000000000000000000000`, and iv/nonce of `0x00000000000000000000000000000000` (if applicable).
 
 ## SUPPORTED ALGORITHMS
 
-**ECB** = aes-128-ecb, aes-192-ecb, aes-256-ecb, aria-128-ecb, aria-192-ecb, aria-256-ecb, bf-ecb, camellia-128-ecb, camellia-192-ecb, camellia-256-ecb, cast5-ecb, des-ecb, idea-ecb, rc2-ecb, rc5-ecb, seed-ecb, sm4-ecb
+**ECB** = `aes-128-ecb, aes-192-ecb, aes-256-ecb, camellia-128-ecb, camellia-192-ecb, camellia-256-ecb, seed-ecb, sm4-ecb, cast5-ecb, bf-ecb, idea-ecb, des3-64-ecb`
 
-**CBC** = aes-128-cbc, aes-192-cbc, aes-256-cbc, aria-128-cbc, aria-192-cbc, aria-256-cbc, bf-cbc, camellia-128-cbc, camellia-192-cbc, camellia-256-cbc, cast-cbc, cast5-cbc, des-cbc, des-ede-cbc, des-ede3-cbc, idea-cbc, rc2-40-cbc, rc2-64-cbc, rc2-cbc, rc5-cbc, seed-cbc, sm4-cbc
+**CBC** = `aes-128-cbc, aes-192-cbc, aes-256-cbc, camellia-128-cbc, camellia-192-cbc, camellia-256-cbc, seed-cbc, sm4-cbc, cast5-cbc, bf-cbc, idea-cbc, des-64-cbc`
 
-**CFB** = aria-128-cfb, aria-128-cfb1, aria-128-cfb8, aria-192-cfb, aria-192-cfb1, aria-256-cfb8, bf-cfb, cast5-cfb, des-cfb, des-ede-cfb, des-ede3-cfb, idea-cfb, rc2-cfb, rc5-cfb, seed-cfb, sm4-cfb
+**CTR** = `aes-128-ctr, aes-192-ctr, aes-256-ctr, camellia-128-ctr, camellia-192-ctr, camellia-256-ctr, sm4-ctr`
 
-**CTR** = aria-128-ctr, aria-192-ctr, aria-256-ctr, sm4-ctr
+**OFB** = `aes-128-ofb, aes-192-ofb, aes-256-ofb, camellia-128-ofb, camellia-192-ofb, camellia-256-ofb, seed-ofb, sm4-ofb, cast5-ofb, bf-ofb, idea-ofb, des3-64-ofb`
 
-**OFB** = aria-128-ofb, aria-192-ofb, aria-256-ofb, bf-ofb, cast5-ofb, des-ede-ofb, des-ofb, idea-ofb, rc2-ofb, rc5-ofb, seed-ofb, sm4-ofb
+**CFB** = `aes-128-cfb, aes-192-cfb, aes-256-cfb, camellia-128-cfb, camellia-192-cfb, camellia-256-cfb, seed-cfb, sm4-cfb, cast5-cfb, bf-cfb, idea-cfb, des3-64-cfb`
 
-**OTHER** = base64, bf, cast, des, des-ede, des-ede3, des3, desx, idea, rc2, rc4, rc4-40, rc5, seed
-
-> [!NOTE]  
-> Some algorithms which are considered "legacy" may not work (for example, algorithms containing 'des'), depending on your machine.
+**OTHER** = `rc4-128`
 
 ## SUPPORTED FILE TYPES
-- PNG (.png)
-- JPG (.jpg)
-- JPEG (.jpeg)
-- BMP (.bmp)
-- BMP (.bmp)
-- GIF (.gif)
-- WEBP (.webp)
-- APNG (.apng)
-
-Note that while animated images (such as .gif) are accepted, they will not preserve their animation after the process.
+- PNG `.png`
+- JPG `.jpg`
+- JPEG `.jpeg`
+- BMP `.bmp`
+- WEBP `.webp`
+- APNG `.apng`
 
 ## EXAMPLES
 
@@ -173,14 +144,17 @@ Note that while animated images (such as .gif) are accepted, they will not prese
 This program has only been tested on Windows. I cannot guarantee that it works on other operating systems.
 
 ### Metadata
-EYECRYPT stores the resulting algorithm, key, and iv (if applicable) in the metadata of the output image.
+EYECRYPT stores the resulting algorithm, key, and iv/nonce (if applicable) in the EXIF of the output image.
 
-To view this metadata, type the following into the terminal:
-```
-magick identify -format %c "your-image.png"
-```
-Please note that there is no guarantee that this metadata is preserved if the image is modified in anyway. If you wish to store the parameters you used to encrypt an image, it is reccomended that you store it elsewhere yourself and do not rely on the metadata.
+There are a variety of tools online that allow you to view the EXIF data. 
 
-## IMAGE RIGHTS
-I reserve no rights to any images produced by this program. 
-You are welcome to use any images produced by this program freely for any projects, personal or commercial, no attribution or permission required.
+If you have `ImageMagick` installed, you can call the following to view the EXIF data.
+```
+magick identify -format '%[EXIF:*]' "your-image.png"
+```
+
+Please note that there is no guarantee that this EXIF data is preserved if the image is modified in anyway. If you wish to store the parameters you used to encrypt an image, it is reccomended that you store it elsewhere yourself and do not rely on the EXIF data.
+
+### Image Usage
+You are welcome to freely use any of the images that you create using this program. No restrictions and no permission or attribution required, as long as you had rights to the original image.
+
