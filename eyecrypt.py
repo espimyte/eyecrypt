@@ -1,33 +1,128 @@
 #!/usr/bin/env python
 
+import enum
 import subprocess
 import tempfile
 from PIL import Image
 import piexif
 
-class Algorithms():
-    ECB = ["aes-128-ecb", "aes-192-ecb", "aes-256-ecb", "aria-128-ecb", "aria-192-ecb", "aria-256-ecb", "bf-ecb","camellia-128-ecb", "camellia-192-ecb", "camellia-256-ecb", "cast5-ecb", "des-ecb", "idea-ecb", "rc2-ecb", "rc5-ecb", "seed-ecb", "sm4-ecb"]
-    CBC = ["aes-128-cbc", "aes-192-cbc", "aes-256-cbc", "aria-128-cbc", "aria-192-cbc", "aria-256-cbc", "bf-cbc", "camellia-128-cbc", "camellia-192-cbc", "camellia-256-cbc", "cast-cbc", "cast5-cbc", "des-cbc", "des-ede-cbc", "des-ede3-cbc", "idea-cbc", "rc2-40-cbc", "rc2-64-cbc", "rc2-cbc", "rc5-cbc", "seed-cbc", "sm4-cbc"]
-    CFB = ["aria-128-cfb", "aria-128-cfb1", "aria-128-cfb8", "aria-192-cfb", "aria-192-cfb1", "aria-256-cfb8", "bf-cfb", "cast5-cfb", "des-cfb", "des-ede-cfb", "des-ede3-cfb", "idea-cfb", "rc2-cfb", "rc5-cfb", "seed-cfb", "sm4-cfb"]
-    CTR = ["aria-128-ctr", "aria-192-ctr", "aria-256-ctr", "sm4-ctr"]
-    OFB = ["aria-128-ofb", "aria-192-ofb", "aria-256-ofb", "bf-ofb", "cast5-ofb", "des-ede-ofb", "des-ofb", "idea-ofb", "rc2-ofb", "rc5-ofb", "seed-ofb", "sm4-ofb"]
-    OTHER = ["base64", "bf", "cast", "des", "des-ede", "des-ede3", "des3", "desx", "idea", "rc2", "rc4", "rc4-40", "rc5", "seed"]
+import warnings
+from cryptography.hazmat import *
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from cryptography.hazmat.primitives.ciphers.algorithms import *
+from cryptography.utils import CryptographyDeprecationWarning
+warnings.filterwarnings("ignore", category=CryptographyDeprecationWarning)
+
+class Mode(enum.Enum):
+    ECB = 'ecb'
+    CBC = 'cbc'
+    CTR = 'ctr'
+    OFB = 'ofb'
+    CFB = 'cfb'
+
+class Encryption():
+    methods = {"aes-128-ecb": {'algorithm': algorithms.AES128, 'key_size': algorithms.AES128.key_size, 'block_size': algorithms.AES128.block_size, 'mode': Mode.ECB},
+    "aes-192-ecb": {'algorithm': algorithms.AES, 'key_size': 192, 'block_size': algorithms.AES.block_size, 'mode': Mode.ECB},
+    "aes-256-ecb": {'algorithm': algorithms.AES256, 'key_size': algorithms.AES256.key_size, 'block_size': algorithms.AES256.block_size, 'mode': Mode.ECB},
+    "camellia-128-ecb": {'algorithm': algorithms.Camellia, 'key_size': 128, 'block_size': algorithms.Camellia.block_size, 'mode': Mode.ECB},
+    "camellia-192-ecb": {'algorithm': algorithms.Camellia, 'key_size': 192, 'block_size': algorithms.Camellia.block_size, 'mode': Mode.ECB},
+    "camellia-256-ecb": {'algorithm': algorithms.Camellia, 'key_size': 256, 'block_size': algorithms.Camellia.block_size, 'mode': Mode.ECB},
+    "seed-ecb": {'algorithm': algorithms.SEED, 'key_size': 128, 'block_size': algorithms.SEED.block_size, 'mode': Mode.ECB},
+    "sm4-ecb": {'algorithm': algorithms.SM4, 'key_size': 128, 'block_size': algorithms.SM4.block_size, 'mode': Mode.ECB},
+    "cast5-ecb": {'algorithm': algorithms.CAST5, 'key_size': 128, 'block_size': algorithms.CAST5.block_size, 'mode': Mode.ECB},
+    "bf-ecb": {'algorithm': algorithms.Blowfish, 'key_size': 128, 'block_size': algorithms.Blowfish.block_size, 'mode': Mode.ECB},
+    "idea-ecb": {'algorithm': algorithms.IDEA, 'key_size': 128, 'block_size': algorithms.IDEA.block_size, 'mode': Mode.ECB},
+    "des3-ecb": {'algorithm': algorithms.TripleDES, 'key_size': 64, 'block_size': algorithms.TripleDES.block_size, 'mode': Mode.ECB},
+
+    "aes-128-cbc": {'algorithm': algorithms.AES128, 'key_size': algorithms.AES128.key_size, 'block_size': algorithms.AES128.block_size, 'mode': Mode.CBC},
+    "aes-192-cbc": {'algorithm': algorithms.AES, 'key_size': 192, 'block_size': algorithms.AES.block_size, 'mode': Mode.CBC},
+    "aes-256-cbc": {'algorithm': algorithms.AES256, 'key_size': algorithms.AES256.key_size, 'block_size': algorithms.AES256.block_size, 'mode': Mode.CBC},
+    "camellia-128-cbc": {'algorithm': algorithms.Camellia, 'key_size': 128, 'block_size': algorithms.Camellia.block_size, 'mode': Mode.CBC},
+    "camellia-192-cbc": {'algorithm': algorithms.Camellia, 'key_size': 192, 'block_size': algorithms.Camellia.block_size, 'mode': Mode.CBC},
+    "camellia-256-cbc": {'algorithm': algorithms.Camellia, 'key_size': 256, 'block_size': algorithms.Camellia.block_size, 'mode': Mode.CBC},
+    "seed-cbc": {'algorithm': algorithms.SEED, 'key_size': 128, 'block_size': algorithms.SEED.block_size, 'mode': Mode.CBC},
+    "sm4-cbc": {'algorithm': algorithms.SM4, 'key_size': 128, 'block_size': algorithms.SM4.block_size, 'mode': Mode.CBC},
+    "cast5-cbc": {'algorithm': algorithms.CAST5, 'key_size': 128, 'block_size': algorithms.CAST5.block_size, 'mode': Mode.CBC},
+    "bf-cbc": {'algorithm': algorithms.Blowfish, 'key_size': 128, 'block_size': algorithms.Blowfish.block_size, 'mode': Mode.CBC},
+    "idea-cbc": {'algorithm': algorithms.IDEA, 'key_size': 128, 'block_size': algorithms.IDEA.block_size, 'mode': Mode.CBC},
+    "des3-cbc": {'algorithm': algorithms.TripleDES, 'key_size': 64, 'block_size': algorithms.TripleDES.block_size, 'mode': Mode.CBC},
+
+    "aes-128-ctr": {'algorithm': algorithms.AES128, 'key_size': algorithms.AES128.key_size, 'block_size': algorithms.AES128.block_size, 'mode': Mode.CTR},
+    "aes-192-ctr": {'algorithm': algorithms.AES, 'key_size': 192, 'block_size': algorithms.AES.block_size, 'mode': Mode.CTR},
+    "aes-256-ctr": {'algorithm': algorithms.AES256, 'key_size': algorithms.AES256.key_size, 'block_size': algorithms.AES256.block_size, 'mode': Mode.CTR},
+    "camellia-128-ctr": {'algorithm': algorithms.Camellia, 'key_size': 128, 'block_size': algorithms.Camellia.block_size, 'mode': Mode.CTR},
+    "camellia-192-ctr": {'algorithm': algorithms.Camellia, 'key_size': 192, 'block_size': algorithms.Camellia.block_size, 'mode': Mode.CTR},
+    "camellia-256-ctr": {'algorithm': algorithms.Camellia, 'key_size': 256, 'block_size': algorithms.Camellia.block_size, 'mode': Mode.CTR},
+    "sm4-ctr": {'algorithm': algorithms.SM4, 'key_size': 128, 'block_size': algorithms.SM4.block_size, 'mode': Mode.CTR},
+
+    "aes-128-ofb": {'algorithm': algorithms.AES128, 'key_size': algorithms.AES128.key_size, 'block_size': algorithms.AES128.block_size, 'mode': Mode.OFB},
+    "aes-192-ofb": {'algorithm': algorithms.AES, 'key_size': 192, 'block_size': algorithms.AES.block_size, 'mode': Mode.OFB},
+    "aes-256-ofb": {'algorithm': algorithms.AES256, 'key_size': algorithms.AES256.key_size, 'block_size': algorithms.AES256.block_size, 'mode': Mode.OFB},
+    "camellia-128-ofb": {'algorithm': algorithms.Camellia, 'key_size': 128, 'block_size': algorithms.Camellia.block_size, 'mode': Mode.OFB},
+    "camellia-192-ofb": {'algorithm': algorithms.Camellia, 'key_size': 192, 'block_size': algorithms.Camellia.block_size, 'mode': Mode.OFB},
+    "camellia-256-ofb": {'algorithm': algorithms.Camellia, 'key_size': 256, 'block_size': algorithms.Camellia.block_size, 'mode': Mode.OFB},
+    "seed-ofb": {'algorithm': algorithms.SEED, 'key_size': 128, 'block_size': algorithms.SEED.block_size, 'mode': Mode.OFB},
+    "sm4-ofb": {'algorithm': algorithms.SM4, 'key_size': 128, 'block_size': algorithms.SM4.block_size, 'mode': Mode.OFB},
+    "cast5-ofb": {'algorithm': algorithms.CAST5, 'key_size': 128, 'block_size': algorithms.CAST5.block_size, 'mode': Mode.OFB},
+    "bf-ofb": {'algorithm': algorithms.Blowfish, 'key_size': 128, 'block_size': algorithms.Blowfish.block_size, 'mode': Mode.OFB},
+    "idea-ofb": {'algorithm': algorithms.IDEA, 'key_size': 128, 'block_size': algorithms.IDEA.block_size, 'mode': Mode.OFB},
+    "des3-ofb": {'algorithm': algorithms.TripleDES, 'key_size': 64, 'block_size': algorithms.TripleDES.block_size, 'mode': Mode.OFB},
+
+    "aes-128-cfb": {'algorithm': algorithms.AES128, 'key_size': algorithms.AES128.key_size, 'block_size': algorithms.AES128.block_size, 'mode': Mode.CFB},
+    "aes-192-cfb": {'algorithm': algorithms.AES, 'key_size': 192, 'block_size': algorithms.AES.block_size, 'mode': Mode.CFB},
+    "aes-256-cfb": {'algorithm': algorithms.AES256, 'key_size': algorithms.AES256.key_size, 'block_size': algorithms.AES256.block_size, 'mode': Mode.CFB},
+    "camellia-128-cfb": {'algorithm': algorithms.Camellia, 'key_size': 128, 'block_size': algorithms.Camellia.block_size, 'mode': Mode.CFB},
+    "camellia-192-cfb": {'algorithm': algorithms.Camellia, 'key_size': 192, 'block_size': algorithms.Camellia.block_size, 'mode': Mode.CFB},
+    "camellia-256-cfb": {'algorithm': algorithms.Camellia, 'key_size': 256, 'block_size': algorithms.Camellia.block_size, 'mode': Mode.CFB},
+    "seed-cfb": {'algorithm': algorithms.SEED, 'key_size': 128, 'block_size': algorithms.SEED.block_size, 'mode': Mode.CFB},
+    "sm4-cfb": {'algorithm': algorithms.SM4, 'key_size': 128, 'block_size': algorithms.SM4.block_size, 'mode': Mode.CFB},
+    "cast5-cfb": {'algorithm': algorithms.CAST5, 'key_size': 128, 'block_size': algorithms.CAST5.block_size, 'mode': Mode.CFB},
+    "bf-cfb": {'algorithm': algorithms.Blowfish, 'key_size': 128, 'block_size': algorithms.Blowfish.block_size, 'mode': Mode.CFB},
+    "idea-cfb": {'algorithm': algorithms.IDEA, 'key_size': 128, 'block_size': algorithms.IDEA.block_size, 'mode': Mode.CFB},
+    "des3-cfb": {'algorithm': algorithms.TripleDES, 'key_size': 64, 'block_size': algorithms.TripleDES.block_size, 'mode': Mode.CFB},
+    }
 
 class Defaults():
     ALGORITHM = "aes-128-ecb"
     KEY = "00000000000000000000000000000000"
-    IV = "0"
+    IV = "00000000000000000000000000000000"
+    NONCE = "00000000000000000000000000000000"
 
-class Messages():
-    NO_MAGICK = "ImageMagick could not be found. Please install ImageMagick and/or check if you have it installed correctly."
-    NO_OPENSSL = "OpenSSL could not be found. Please install OpenSSL and/or check if you have it installed correctly."
-
-algorithms = Algorithms()
+encryption = Encryption()
 defaults = Defaults()
-messages = Messages()
 
 def log_action(action, args):
     print("\033[94m{}\033[00m".format(action))
+
+def is_valid_hex(str):
+    """
+    Returns whether or not a given string is a valid hexadecimal.
+    """
+    try:
+        int(str, 16)
+        return True
+    except:
+        return False
+    
+def resize_hex(hex, bit_size):
+    target_length = int(bit_size/4)
+    hex_length = len(hex)
+
+    if (hex_length < target_length):
+        diff = target_length - (hex_length % target_length)
+        return hex + ('0'*diff)
+    elif (hex_length > target_length):
+        return hex[:target_length]
+
+    return hex
+
+def pad_bytes(bytes, bit_size):
+    bytes_size = len(bytes)
+    target_size = bit_size/8
+    diff = int(target_size-int(bytes_size%target_size))
+    bytes += b'\0'*(diff)
+
+    return bytes
 
 def check_installation(program):
     """
@@ -53,17 +148,85 @@ def call_subprocess(cmd, error_msg):
     if (return_code != 0):
         raise Exception(error_msg)
 
-def generate_encrypt_command(input, output, algo, key, iv):
-    """
-    Generates an encryption command given the algorithm, key, and input and output path.
-    For algorithms that require an initialization value, a default value is used.
-    """
-    if (algo not in algorithms.ECB):
-        return 'openssl enc -{algo} -e -K {key} -iv {iv} -in {input} -out {output}'.format(input = input, output = output, algo = algo, key = key, iv = iv)
-    else:
-        return 'openssl enc -{algo} -e -K {key} -in {input} -out {output}'.format(input = input, output = output, algo = algo, key = key)
+def get_mode(method_data, block_size, iv, nonce):
+    iv = resize_hex(iv, block_size)
+    iv_bytes = bytes.fromhex(iv)
 
-def eyecrypt(input, output, algo = defaults.ALGORITHM, key = defaults.KEY, iv = defaults.IV, log_action = log_action, **kwargs):
+    nonce = resize_hex(nonce, block_size)
+    nonce_bytes = bytes.fromhex(nonce)
+
+    match method_data.get('mode'):
+        case Mode.ECB:
+            mode = modes.ECB()
+        case Mode.CBC:
+            mode = modes.CBC(iv_bytes)
+        case Mode.OFB:
+            mode = modes.OFB(iv_bytes)
+        case Mode.CFB:
+            mode = modes.CFB(iv_bytes)
+        case Mode.CTR:
+            mode = modes.CTR(nonce_bytes)
+        case _:
+            mode = modes.ECB()
+    
+    return mode
+
+def encrypt_file(converted_image_path, encrypted_image_path, algo, key, iv, nonce):
+    with open(converted_image_path, "rb") as converted_binary:
+        method_data = encryption.methods.get(algo)
+
+        algorithm = method_data.get('algorithm')
+
+        key_size = method_data.get('key_size')
+        block_size = method_data.get('block_size')
+
+        key = resize_hex(key, key_size)
+        key_bytes = bytes.fromhex(key)
+
+        mode = get_mode(method_data, block_size, iv, nonce)
+
+        converted_binary_bytes = converted_binary.read()
+        converted_binary_bytes = pad_bytes(converted_binary_bytes, block_size)
+
+        cipher = Cipher(algorithm(key_bytes), mode)
+        encryptor = cipher.encryptor()
+        result = encryptor.update(converted_binary_bytes) + encryptor.finalize()
+
+        with open(encrypted_image_path, "wb") as binary_file:
+            binary_file.write(result)
+
+def convert_to_bmp(input_image_path, converted_image_path):
+    try:
+        img = Image.open(input_image_path)
+        img.save(converted_image_path)
+    except:
+        raise Exception("Something went wrong while converting the image.")
+
+def generate_comment(algo, key, iv, nonce):
+    data = ['algorithm: {algo}'.format(algo), 'key: {key}'.format(key)]
+    method_data = encryption.methods.get(algo)
+    mode = method_data.get('mode')
+
+    match mode:
+        case Mode.CBC | Mode.OFB | Mode.CFB:
+            data.append('iv: {iv}'.format(iv))
+        case Mode.CTR:
+            data.append('nonce: {nonce}'.format(nonce))
+    
+    return 'Made with EYECRYPT ('+', '.join(data)+')'
+
+def generate_output(encrypted_image_path, output_image_path, algo, key, iv, nonce):
+    try:
+        exif_ifd = {piexif.ExifIFD.UserComment: 'Made with EYECRYPT (algorithm: {algo}, key: {key}, iv: {iv}, nonce: {nonce})'.format( algo = algo, key = key, iv = iv, nonce = nonce).encode()}
+        exif_dict = {"Exif": exif_ifd}
+        exif_dat = piexif.dump(exif_dict)
+
+        encrypted = Image.open(encrypted_image_path)
+        encrypted.save(output_image_path,  exif=exif_dat)
+    except:
+        raise Exception("Something went wrong while generating the output image.")
+
+def eyecrypt(input, output, algo = defaults.ALGORITHM, key = defaults.KEY, iv = defaults.IV, nonce = defaults.NONCE, log_action = log_action, **kwargs):
     """
     Performs the process of converting and encrypting an image file given an input path, output path, key and algorithm.
     """
@@ -79,16 +242,11 @@ def eyecrypt(input, output, algo = defaults.ALGORITHM, key = defaults.KEY, iv = 
 
     # Convert image to bmp
     log_action(action = "Converting image to bmp...", args = kwargs)
-    try:
-        converted = Image.open(input_image_path)
-        converted.save(converted_image_path)
-    except:
-        raise Exception("Something went wrong while converting the image.")
+    convert_to_bmp(input_image_path, converted_image_path)
 
     # Encrypt converted image
     log_action(action ="Encrypting converted image...", args = kwargs)
-    encrypt_cmd = generate_encrypt_command(converted_image_path, encrypted_image_path, algo, key, iv)
-    call_subprocess(encrypt_cmd, "Something went wrong while encrypting the image.")
+    encrypt_file(converted_image_path, encrypted_image_path, algo, key, iv, nonce)
 
     # Read bmp header of converted image
     log_action(action ="Reading bmp header of converted image...", args = kwargs)
@@ -103,12 +261,4 @@ def eyecrypt(input, output, algo = defaults.ALGORITHM, key = defaults.KEY, iv = 
 
     # Generate output image
     log_action(action = "Generating output image...", args = kwargs)
-    try:
-        exif_ifd = {piexif.ExifIFD.UserComment: 'Made with EYECRYPT (algorithm: {algo}, key: {key}, iv: {iv})'.format(input = output_image_path, output = output_image_path, algo = algo, key = key, iv = iv).encode()}
-        exif_dict = {"Exif": exif_ifd}
-        exif_dat = piexif.dump(exif_dict)
-
-        encrypted = Image.open(encrypted_image_path)
-        encrypted.save(output_image_path,  exif=exif_dat)
-    except:
-        raise Exception("Something went wrong while generating the output image.")
+    generate_output(encrypted_image_path, output_image_path, algo, key, iv, nonce)

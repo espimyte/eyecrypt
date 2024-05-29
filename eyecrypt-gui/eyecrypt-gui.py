@@ -24,8 +24,8 @@ from tkinter import *
 from tkinter import filedialog
 from tkinter.ttk import Combobox, Style
 from PIL import Image, ImageTk
-from eyecrypt import algorithms, defaults, messages
-from eyecrypt import check_installation, eyecrypt
+from eyecrypt import encryption, defaults, Mode
+from eyecrypt import is_valid_hex, eyecrypt
 
 SELECTOR_COLOR = '#e8e8e8'
 WARNING_COLOR = '#ff8f4a'
@@ -38,9 +38,10 @@ DISPLAY_WIDTH = 400
 
 NO_FILE_SELECTED = "(none)"
 
-LOAD_FILE_TYPES = [("Image Files", "*.png *.jpg *.jpeg *.bmp *.gif *.webp *.apng")]
-SAVE_FILE_TYPES = [("Image Files", "*.png *.jpg *.jpeg *.bmp *.gif *.webp *.apng"), ("PNG", "*.png"), ("JPG", "*.jpg"), ("JPEG", ".jpeg"), ("BMP, *.bmp"), ("BMP, *.bmp"), ("GIF", ".gif"), ("WEBP", "*.webp"), ("APNG", "*.apng")]
-SUPPORTED_ALGORITHMS = algorithms.ECB + algorithms.CBC + algorithms.CFB + algorithms.CTR + algorithms.OFB + algorithms.OTHER
+LOAD_FILE_TYPES = [("Image Files", "*.png *.jpg *.jpeg *.bmp *.webp *.apng")]
+SAVE_FILE_TYPES = [("Image Files", "*.png *.jpg *.jpeg *.bmp *.webp *.apng"), ("PNG", "*.png"), ("JPG", "*.jpg"), ("JPEG", ".jpeg"), ("BMP, *.bmp"), ("BMP, *.bmp"), ("GIF", ".gif"), ("WEBP", "*.webp"), ("APNG", "*.apng")]
+ECB_ALGORITHMS = list({k:v for k,v in encryption.methods.items() if v.get('mode') == Mode.ECB}.keys())
+ALL_ALGORITHMS = list(encryption.methods.keys())
 
 TIMEOUT = 60
 
@@ -109,16 +110,6 @@ def reset_display(label, display):
     display.configure(image="", height=20)
     label.configure(text="")
 
-def is_valid_hex(str):
-    """
-    Returns whether or not a given string is a valid hexadecimal.
-    """
-    try:
-        int(str, 16)
-        return True
-    except:
-        return False
-
 def write_action(action, args):
     """
     Writes the current program action to the log.
@@ -152,10 +143,6 @@ def main():
                 raise Exception("Please choose a save location.")
             if (not is_valid_hex(key.get())):
                 raise Exception("Please enter a valid key.")
-            if (not check_installation("magick")):
-                raise Exception(messages.NO_MAGICK)
-            if (not check_installation("openssl")):
-                raise Exception(messages.NO_OPENSSL)
 
             thread = RaisingThread(target = eyecrypt, kwargs={'input': input.file_path, 'output': output.file_path, 'algo': algorithm.get(), 'key': key.get(), 'iv': defaults.IV, 'log_action': write_action, 'log': log})
             thread.daemon = True
@@ -225,11 +212,20 @@ def main():
         """
         Checks whether an algorithm is an ECB algorithm. Warns the user if not.
         """
-        if algorithm.get() not in algorithms.ECB:
+        method_data = encryption.methods.get(algorithm.get())
+        mode = method_data.get('mode')
+
+        if mode != Mode.ECB:
             algorithm_tooltip.configure(text="ECB algorithms are reccomended for more discernable results.", fg="orange")
         else:
             algorithm_tooltip.configure(text="")
         return
+    
+    def update_algo_menu(*args):
+        if (algorithm_advanced.get()):
+            algorithm_menu.configure(values=ALL_ALGORITHMS)
+        else:
+            algorithm_menu.configure(values=ECB_ALGORITHMS)
     
     # Window, root, and style setup
     window = Tk()
@@ -282,7 +278,7 @@ def main():
     key = StringVar(root)
     key.set(defaults.KEY)
     key_selector = Frame(options)
-    key_selector.grid(column=0, row=0)
+    key_selector.grid(column=0, row=0, sticky = W)
     Label(key_selector, text = "Key:").grid(column=0, row=0)
 
     key_entry_frame = Frame(key_selector)
@@ -306,8 +302,12 @@ def main():
 
     algorithm_menu_frame = Frame(algorithm_selector)
     algorithm_menu_frame.grid(column=1, row=0)
-    algorithm_menu = Combobox(algorithm_menu_frame, textvariable = algorithm, state="readonly", values = SUPPORTED_ALGORITHMS, width=20)
+    algorithm_menu = Combobox(algorithm_menu_frame, textvariable = algorithm, state="readonly", values = ECB_ALGORITHMS, width=20)
     algorithm_menu.grid(column=0, row=0)
+
+    algorithm_advanced = IntVar()
+    algorithm_check = Checkbutton(algorithm_selector, text = "Show non-ECB", variable = algorithm_advanced, onvalue = 1, offvalue = 0, command=update_algo_menu)
+    algorithm_check.grid(column = 2, row = 0)
 
     algorithm_tooltip = Label(options, text="", width=50)
     algorithm_tooltip.grid(column=1, row=1, pady=(0,5))
@@ -357,9 +357,6 @@ def main():
     # LOG
     log = Label(root, text="")
     log.grid(column=0, row=4, pady=(0,5))
-    
-    if (not check_installation("openssl")):
-        log.configure(text=messages.NO_OPENSSL, fg="red")
 
     window.mainloop()
     return
