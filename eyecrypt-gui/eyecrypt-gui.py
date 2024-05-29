@@ -45,7 +45,7 @@ ALL_ALGORITHMS = list(encryption.methods.keys())
 
 TIMEOUT = 60
 
-class RaisingThread(threading.Thread):
+class RaiseThread(threading.Thread):
     """
     A thread class that is capable of raising an exception that can be caught.
     """
@@ -56,8 +56,8 @@ class RaisingThread(threading.Thread):
         except Exception as e:
             self._exc = e
     
-    def join(self, timeout=None):
-        super().join(timeout=timeout)
+    def join(self):
+        super().join()
         if self._exc:
             raise self._exc
 
@@ -144,7 +144,7 @@ def main():
             if (not is_valid_hex(key.get())):
                 raise Exception("Please enter a valid key.")
 
-            thread = RaisingThread(target = eyecrypt, kwargs={'input': input.file_path, 'output': output.file_path, 'algo': algorithm.get(), 'key': key.get(), 'iv': defaults.IV, 'log_action': write_action, 'log': log})
+            thread = RaiseThread(target = eyecrypt, kwargs={'input': input.file_path, 'output': output.file_path, 'algo': algorithm.get(), 'key': key.get(), 'iv': defaults.IV, 'log_action': write_action, 'log': log})
             thread.daemon = True
             time_started = time.time()
             thread.start()

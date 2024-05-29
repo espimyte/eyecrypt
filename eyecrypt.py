@@ -55,22 +55,6 @@ def pad_bytes(bytes, bit_size):
 
     return bytes
 
-def check_installation(program):
-    """
-    Returns whether or not a program is installed.
-    """
-    cmd = program
-    if (program == "openssl"):
-        cmd = "openssl version"
-    elif (program == "magick"):
-        cmd = "magick -version"
-    
-    result = subprocess.call(cmd, stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL, shell=True)
-    if (result == 0):
-        return True
-    else:
-        return False
-
 def get_key_size(method_data, hex):
     """
     Returns desired key size for the algorithm.
@@ -136,7 +120,6 @@ def encrypt_file(converted_image_path, encrypted_image_path, algo, key, iv, nonc
         block_size = method_data.get('block_size') if 'block_size' in method_data else 0
 
         key = resize_hex(key, key_size)
-
         key_bytes = bytes.fromhex(key)
 
         mode = get_mode(method_data, block_size, iv, nonce)
