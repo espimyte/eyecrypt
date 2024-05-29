@@ -93,7 +93,7 @@ The CLI version of EYECRYPT can simply be ran by calling the path to the `eyecry
 
 If you wish to be able to call EYECRYPT from anywhere, you can add the folder that contains the `eyecrypt.exe` file to your `PATH`. If done successfuly, you should be able to run the program from anywhere using `eyecrypt`.
 
-You may require a system restart after adding the program to the path before using it.
+You may require a system restart after adding the program to the `PATH` before using it.
 
 Usage Examples
 ```
