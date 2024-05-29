@@ -8,8 +8,8 @@ parent = os.path.dirname(current)
 sys.path.append(parent)
 
 import argparse
-from eyecrypt import defaults, messages
-from eyecrypt import check_installation, eyecrypt
+from eyecrypt import defaults
+from eyecrypt import eyecrypt
 
 def print_action(action, args):
     print("\033[94m{}\033[00m".format(action))
@@ -25,6 +25,7 @@ def get_args():
     parser.add_argument("-algo", "--algorithm", help="encryption algorithm", required=False)
     parser.add_argument("-key", "--key", help="key", required=False)
     parser.add_argument("-iv", "--iv", help="initialization value", required=False)
+    parser.add_argument("-nonce", "--nonce", help="nonce", required=False)
 
     return parser.parse_args()
 
@@ -37,23 +38,18 @@ def main():
     algo = defaults.ALGORITHM
     key = defaults.KEY
     iv = defaults.IV
+    nonce = defaults.NONCE
 
-    if (args.algorithm):
+    if args.algorithm:
         algo = args.algorithm
-    if (args.key):
+    if args.key:
         key = args.key
     if args.iv:
         iv = args.iv
+    if args.nonce:
+        nonce = args.nonce
 
-    # Check installations
-    if (not check_installation("magick")):
-        print("\033[91m{}\033[00m" .format(messages.NO_MAGICK))
-        return
-    if (not check_installation("openssl")):
-        print("\033[91m{}\033[00m" .format(messages.NO_OPENSSL))
-        return
-
-    eyecrypt(input = input_image_path, output = output_image_path, algo = algo, key = key, iv = iv, log_action = print_action)
+    eyecrypt(input = input_image_path, output = output_image_path, algo = algo, key = key, iv = iv, nonce = nonce, log_action = print_action)
 
     print("\033[92m{}\033[00m".format("Finished! (Saved to "+output_image_path+")"))
     return
