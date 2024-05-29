@@ -12,9 +12,15 @@ from eyecrypt import defaults
 from eyecrypt import eyecrypt
 
 def print_action(action, args):
+    """
+    Prints the current action to stdout.
+    """
     print("\033[94m{}\033[00m".format(action))
 
 def get_args():
+    """
+    Parses command arguments.
+    """
     parser = argparse.ArgumentParser()
 
     # Required arguments: input and output file paths

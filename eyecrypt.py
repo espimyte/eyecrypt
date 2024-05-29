@@ -14,6 +14,9 @@ warnings.filterwarnings("ignore", category=CryptographyDeprecationWarning)
 from encryption import *
 
 def log_action(action, args):
+    """
+    Logs the given action. Helper command to help keep track of function process.
+    """
     print("\033[94m{}\033[00m".format(action))
 
 def is_valid_hex(str):
@@ -27,6 +30,9 @@ def is_valid_hex(str):
         return False
     
 def resize_hex(hex, bit_size):
+    """
+    Resizes a given hex string to match the given bit size.
+    """
     target_length = int(bit_size/4)
     hex_length = len(hex)
 
@@ -39,6 +45,9 @@ def resize_hex(hex, bit_size):
     return hex
 
 def pad_bytes(bytes, bit_size):
+    """
+    Given bytes and a bit size, pads the data until it is divisible by the bit size.
+    """
     bytes_size = len(bytes)
     target_size = bit_size/8
     diff = int(target_size-int(bytes_size%target_size))
@@ -62,15 +71,10 @@ def check_installation(program):
     else:
         return False
 
-def call_subprocess(cmd, error_msg):
-    """
-    Calls the subprocess with a given command and raises an exception if there is an error.
-    """
-    return_code = subprocess.call(cmd, shell=True)
-    if (return_code != 0):
-        raise Exception(error_msg)
-
 def get_mode(method_data, block_size, iv, nonce):
+    """
+    Returns the mode with the iv/nonce set to it, if applicable.
+    """
     iv = resize_hex(iv, block_size)
     iv_bytes = bytes.fromhex(iv)
 
@@ -96,9 +100,11 @@ def get_mode(method_data, block_size, iv, nonce):
     return mode
 
 def encrypt_file(converted_image_path, encrypted_image_path, algo, key, iv, nonce):
+    """
+    Encrypts the file at the converted image path to the encrypted image path given the algorithm, key, iv, and nonce.
+    """
     with open(converted_image_path, "rb") as converted_binary:
         method_data = encryption.methods.get(algo)
-
         algorithm = method_data.get('algorithm')
 
         key_size = method_data.get('key_size')
@@ -121,6 +127,9 @@ def encrypt_file(converted_image_path, encrypted_image_path, algo, key, iv, nonc
             binary_file.write(result)
 
 def convert_to_bmp(input_image_path, converted_image_path):
+    """
+    Converts an image to bmp.
+    """
     try:
         img = Image.open(input_image_path)
         img.save(converted_image_path)
@@ -128,6 +137,9 @@ def convert_to_bmp(input_image_path, converted_image_path):
         raise Exception("Something went wrong while converting the image.")
 
 def generate_comment(algo, key, iv, nonce):
+    """
+    Generates a comment with information about what parameters were used.
+    """
     data = ['algorithm: {}'.format(algo), 'key: {}'.format(key)]
     method_data = encryption.methods.get(algo)
     mode = method_data.get('mode')
@@ -141,6 +153,9 @@ def generate_comment(algo, key, iv, nonce):
     return 'Made with EYECRYPT ('+', '.join(data)+')'
 
 def generate_output(encrypted_image_path, output_image_path, algo, key, iv, nonce):
+    """
+    Generates an output file by converting it to the output image type and injecting parameter information into the EXIF data.
+    """
     try:
         exif_ifd = {piexif.ExifIFD.UserComment: generate_comment(algo, key, iv, nonce).encode()}
         exif_dict = {"Exif": exif_ifd}
