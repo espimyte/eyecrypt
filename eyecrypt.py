@@ -71,6 +71,30 @@ def check_installation(program):
     else:
         return False
 
+def get_key_size(method_data, hex):
+    """
+    Returns desired key size for the algorithm.
+    For algorithms with variable sizes, returns the closest valid key size to the current key, given as a hex string.
+    """
+
+    hex_size = len(hex)*4
+    algorithm = method_data.get('algorithm')
+
+    match algorithm:
+        case algorithms.CAST5:
+            min_size = 40
+            max_size = 128
+        case algorithms.Blowfish:
+            min_size = 32
+            max_size = 448
+        case _:
+            return method_data.get('key_size')
+
+    possible_sizes = range(min_size,max_size+1,8)
+    closest = min(possible_sizes, key=lambda x:abs(x-hex_size))
+    return closest
+
+
 def get_mode(method_data, block_size, iv, nonce):
     """
     Returns the mode with the iv/nonce set to it, if applicable.
@@ -107,10 +131,11 @@ def encrypt_file(converted_image_path, encrypted_image_path, algo, key, iv, nonc
         method_data = encryption.methods.get(algo)
         algorithm = method_data.get('algorithm')
 
-        key_size = method_data.get('key_size')
+        key_size = get_key_size(method_data, key)
         block_size = method_data.get('block_size') if 'block_size' in method_data else 0
 
         key = resize_hex(key, key_size)
+
         key_bytes = bytes.fromhex(key)
 
         mode = get_mode(method_data, block_size, iv, nonce)

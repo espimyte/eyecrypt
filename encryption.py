@@ -23,8 +23,8 @@ class Encryption():
     "camellia-256-ecb": {'algorithm': algorithms.Camellia, 'key_size': 256, 'block_size': algorithms.Camellia.block_size, 'mode': Mode.ECB},
     "seed-ecb": {'algorithm': algorithms.SEED, 'key_size': 128, 'block_size': algorithms.SEED.block_size, 'mode': Mode.ECB},
     "sm4-ecb": {'algorithm': algorithms.SM4, 'key_size': 128, 'block_size': algorithms.SM4.block_size, 'mode': Mode.ECB},
-    "cast5-ecb": {'algorithm': algorithms.CAST5, 'key_size': 128, 'block_size': algorithms.CAST5.block_size, 'mode': Mode.ECB},
-    "bf-ecb": {'algorithm': algorithms.Blowfish, 'key_size': 128, 'block_size': algorithms.Blowfish.block_size, 'mode': Mode.ECB},
+    "cast5-ecb": {'algorithm': algorithms.CAST5, 'block_size': algorithms.CAST5.block_size, 'mode': Mode.ECB},
+    "bf-ecb": {'algorithm': algorithms.Blowfish, 'block_size': algorithms.Blowfish.block_size, 'mode': Mode.ECB},
     "idea-ecb": {'algorithm': algorithms.IDEA, 'key_size': 128, 'block_size': algorithms.IDEA.block_size, 'mode': Mode.ECB},
     "des3-64-ecb": {'algorithm': algorithms.TripleDES, 'key_size': 64, 'block_size': algorithms.TripleDES.block_size, 'mode': Mode.ECB},
 
@@ -36,8 +36,8 @@ class Encryption():
     "camellia-256-cbc": {'algorithm': algorithms.Camellia, 'key_size': 256, 'block_size': algorithms.Camellia.block_size, 'mode': Mode.CBC},
     "seed-cbc": {'algorithm': algorithms.SEED, 'key_size': 128, 'block_size': algorithms.SEED.block_size, 'mode': Mode.CBC},
     "sm4-cbc": {'algorithm': algorithms.SM4, 'key_size': 128, 'block_size': algorithms.SM4.block_size, 'mode': Mode.CBC},
-    "cast5-cbc": {'algorithm': algorithms.CAST5, 'key_size': 128, 'block_size': algorithms.CAST5.block_size, 'mode': Mode.CBC},
-    "bf-cbc": {'algorithm': algorithms.Blowfish, 'key_size': 128, 'block_size': algorithms.Blowfish.block_size, 'mode': Mode.CBC},
+    "cast5-cbc": {'algorithm': algorithms.CAST5, 'block_size': algorithms.CAST5.block_size, 'mode': Mode.CBC},
+    "bf-cbc": {'algorithm': algorithms.Blowfish, 'block_size': algorithms.Blowfish.block_size, 'mode': Mode.CBC},
     "idea-cbc": {'algorithm': algorithms.IDEA, 'key_size': 128, 'block_size': algorithms.IDEA.block_size, 'mode': Mode.CBC},
     "des3-64-cbc": {'algorithm': algorithms.TripleDES, 'key_size': 64, 'block_size': algorithms.TripleDES.block_size, 'mode': Mode.CBC},
 
@@ -57,8 +57,8 @@ class Encryption():
     "camellia-256-ofb": {'algorithm': algorithms.Camellia, 'key_size': 256, 'block_size': algorithms.Camellia.block_size, 'mode': Mode.OFB},
     "seed-ofb": {'algorithm': algorithms.SEED, 'key_size': 128, 'block_size': algorithms.SEED.block_size, 'mode': Mode.OFB},
     "sm4-ofb": {'algorithm': algorithms.SM4, 'key_size': 128, 'block_size': algorithms.SM4.block_size, 'mode': Mode.OFB},
-    "cast5-ofb": {'algorithm': algorithms.CAST5, 'key_size': 128, 'block_size': algorithms.CAST5.block_size, 'mode': Mode.OFB},
-    "bf-ofb": {'algorithm': algorithms.Blowfish, 'key_size': 128, 'block_size': algorithms.Blowfish.block_size, 'mode': Mode.OFB},
+    "cast5-ofb": {'algorithm': algorithms.CAST5, 'block_size': algorithms.CAST5.block_size, 'mode': Mode.OFB},
+    "bf-ofb": {'algorithm': algorithms.Blowfish, 'block_size': algorithms.Blowfish.block_size, 'mode': Mode.OFB},
     "idea-ofb": {'algorithm': algorithms.IDEA, 'key_size': 128, 'block_size': algorithms.IDEA.block_size, 'mode': Mode.OFB},
     "des3-64-ofb": {'algorithm': algorithms.TripleDES, 'key_size': 64, 'block_size': algorithms.TripleDES.block_size, 'mode': Mode.OFB},
 
@@ -70,8 +70,8 @@ class Encryption():
     "camellia-256-cfb": {'algorithm': algorithms.Camellia, 'key_size': 256, 'block_size': algorithms.Camellia.block_size, 'mode': Mode.CFB},
     "seed-cfb": {'algorithm': algorithms.SEED, 'key_size': 128, 'block_size': algorithms.SEED.block_size, 'mode': Mode.CFB},
     "sm4-cfb": {'algorithm': algorithms.SM4, 'key_size': 128, 'block_size': algorithms.SM4.block_size, 'mode': Mode.CFB},
-    "cast5-cfb": {'algorithm': algorithms.CAST5, 'key_size': 128, 'block_size': algorithms.CAST5.block_size, 'mode': Mode.CFB},
-    "bf-cfb": {'algorithm': algorithms.Blowfish, 'key_size': 128, 'block_size': algorithms.Blowfish.block_size, 'mode': Mode.CFB},
+    "cast5-cfb": {'algorithm': algorithms.CAST5, 'block_size': algorithms.CAST5.block_size, 'mode': Mode.CFB},
+    "bf-cfb": {'algorithm': algorithms.Blowfish, 'block_size': algorithms.Blowfish.block_size, 'mode': Mode.CFB},
     "idea-cfb": {'algorithm': algorithms.IDEA, 'key_size': 128, 'block_size': algorithms.IDEA.block_size, 'mode': Mode.CFB},
     "des3-64-cfb": {'algorithm': algorithms.TripleDES, 'key_size': 64, 'block_size': algorithms.TripleDES.block_size, 'mode': Mode.CFB},
 
