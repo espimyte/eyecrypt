@@ -177,13 +177,10 @@ def generate_output(encrypted_image_path, output_image_path, algo, key, iv, nonc
     except:
         raise Exception("Something went wrong while generating the output image.")
 
-def eyecrypt(input, output, algo = defaults.ALGORITHM, key = defaults.KEY, iv = defaults.IV, nonce = defaults.NONCE, log_action = log_action, **kwargs):
+def eyecrypt(input_image_path, output_image_path, algo = defaults.ALGORITHM, key = defaults.KEY, iv = defaults.IV, nonce = defaults.NONCE, log_action = log_action, **kwargs):
     """
     Performs the process of converting and encrypting an image file given an input path, output path, key and algorithm.
     """
-    
-    input_image_path = input
-    output_image_path = output
 
     # Generate temporary directory to store temp files in
     log_action(action = "Creating temp files...", args = kwargs)
