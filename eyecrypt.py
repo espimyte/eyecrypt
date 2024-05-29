@@ -126,6 +126,7 @@ def get_mode(method_data, block_size, iv, nonce):
 def encrypt_file(converted_image_path, encrypted_image_path, algo, key, iv, nonce):
     """
     Encrypts the file at the converted image path to the encrypted image path given the algorithm, key, iv, and nonce.
+    Returns the key, iv, and nonce after modification (if modified).
     """
     with open(converted_image_path, "rb") as converted_binary:
         method_data = encryption.methods.get(algo)
@@ -150,6 +151,8 @@ def encrypt_file(converted_image_path, encrypted_image_path, algo, key, iv, nonc
 
         with open(encrypted_image_path, "wb") as binary_file:
             binary_file.write(result)
+    
+    return key, iv, nonce
 
 def convert_to_bmp(input_image_path, converted_image_path):
     """
@@ -211,7 +214,7 @@ def eyecrypt(input, output, algo = defaults.ALGORITHM, key = defaults.KEY, iv = 
 
     # Encrypt converted image
     log_action(action ="Encrypting converted image...", args = kwargs)
-    encrypt_file(converted_image_path, encrypted_image_path, algo, key, iv, nonce)
+    key, iv, nonce = encrypt_file(converted_image_path, encrypted_image_path, algo, key, iv, nonce)
 
     # Read bmp header of converted image
     log_action(action ="Reading bmp header of converted image...", args = kwargs)
