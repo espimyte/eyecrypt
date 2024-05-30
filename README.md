@@ -153,6 +153,8 @@ Do note that even if the image is output to APNG, it is unlikely to preserve its
 ### Compability
 This program has only been tested on Windows. I cannot guarantee that it works on other operating systems.
 
+Windows may sometimes prevent the app from running. To run the program anyway, click on `More info`, then click `Run anyway`.
+
 ### Metadata
 EYECRYPT stores the resulting algorithm, key, and iv/nonce (if applicable) in the EXIF of the output image.
 
