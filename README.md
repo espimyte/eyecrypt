@@ -73,6 +73,8 @@ The GUI (graphical user interface) version can be considered the "main" and recc
 
 It is intended to be user friendly and not require the user to fiddle with the command line.
 
+To use it, simply run the provided `EYECRYPT.exe` file, and a window should appear. Select a file to encrypt and a file to save the result to. Optionally, select a key and algorithm to use. Press `GO!`, and EYECRYPT will encrypt the image and save the result to the file you specified.
+
 ![](https://github.com/espimyte/eyecrypt/blob/main/assets/eyecrypt-demo.gif?raw=true)
 
 The key can be a hexadecimal of any length. You can use the `random` button to generate a random key!
