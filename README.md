@@ -74,7 +74,12 @@ It is intended to be user friendly and not require the user to fiddle with the c
 
 ![](https://github.com/espimyte/eyecrypt/blob/main/assets/eyecrypt-demo.gif?raw=true)
 
-> [!IMPORTANT]  
+The key can be a hexadecimal of any length. You can use the `random` button to generate a random key!
+Using the same key and algorithm on the same image and the same output file type should always produce the same result.
+
+For more advanced users, the `Show non-ECB` checkbox will allow you to select from non-ECB encryption algorithms.
+
+> [!NOTE]  
 > It is reccomended to use smaller, high contrast images if you wish to see more discernable results. Photos, large images, and/or images with a lot of noise tend to produce more obfuscated results.
 
 ### CLI
@@ -83,6 +88,8 @@ It is intended to be user friendly and not require the user to fiddle with the c
 The CLI (command line interface) version is a version designed for the command line. 
 
 This is an option provided for users that for any reason would require/prefer the ability to use EYECRYPT in the command line.
+
+Unlike the GUI version, the CLI version allows you to specify the iv and nonce values, in addition to the key.
 
 The CLI version of EYECRYPT can simply be ran by calling the path to the `eyecrypt.exe` file from the command line.
 
@@ -100,6 +107,8 @@ You may require a system restart after adding the program to the `PATH` before u
 - `eyecrypt -list` print out a list of all supported algorithms
 
 By default, EYECRYPT uses `aes-128-ecb`, with key `0x00000000000000000000000000000000`, and iv/nonce of `0x00000000000000000000000000000000` (if applicable).
+
+Keys, ivs, and nonce values can be any valid hexadecimal.
 
 ## SUPPORTED ALGORITHMS
 
