@@ -24,8 +24,9 @@ from tkinter import *
 from tkinter import filedialog
 from tkinter.ttk import Combobox, Style
 from PIL import Image, ImageTk
-from eyecrypt import encryption, defaults, Mode
+from eyecrypt import encryption
 from eyecrypt import is_valid_hex, eyecrypt
+from encryption import *
 
 SELECTOR_COLOR = '#e8e8e8'
 WARNING_COLOR = '#ff8f4a'
@@ -144,7 +145,7 @@ def main():
             if (not is_valid_hex(key.get())):
                 raise Exception("Please enter a valid key.")
 
-            thread = RaiseThread(target = eyecrypt, kwargs={'input': input.file_path, 'output': output.file_path, 'algo': algorithm.get(), 'key': key.get(), 'iv': defaults.IV, 'log_action': write_action, 'log': log})
+            thread = RaiseThread(target = eyecrypt, kwargs={'input_file_path': input.file_path, 'output_file_path': output.file_path, 'algo': algorithm.get(), 'key': key.get(), 'iv': defaults.IV, 'log_action': write_action, 'log': log})
             thread.daemon = True
             time_started = time.time()
             thread.start()
