@@ -1,8 +1,8 @@
 Thank you for downloading EYECRYPT!
 
 ---
-To use EYECRYPT, simply run `EYECRYPT.exe`.
-Select a file and a file to save the result to.
+To use it, simply run the provided `EYECRYPT.exe` file, and a window should appear.
+Select a file to encrypt and a file to save the result to.
 Optionally, select a key and algorithm to use.
 Press `GO!`, and EYECRYPT will encrypt the image and save the result to the file you specified.
 
