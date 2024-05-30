@@ -11,6 +11,7 @@ A tool that visualizes encryption in images.
 - [USAGE](#USAGE)
   - [GUI](#GUI)
   - [CLI](#CLI)
+    - [Usage Examples](#Usage-Examples) 
 - [SUPPORTED ALGORITHMS](#SUPPORTED-ALGORITHMS)
 - [SUPPORTED FILE TYPES](#SUPPORTED-FILE-TYPES)
 - [EXAMPLES](#EXAMPLES)
@@ -40,17 +41,11 @@ Below is an image that I created to help me remember the process.
 
 Of course, I was estatic about the result. I wanted to see more! 
 
-Unfortunately, performing this process for each image was rather tedious and I was very lazy. So, I sought a tool online that could perform this for me, to no success.
-
-In addition, there was the issue of different file types. Injecting a BMP header will not work for images that are not BMP. That means either injecting a different header for each image type, or converting each image to BMP. 
-
-Another process that, while simple, can add up to be very tedious over several images.
-
 And so...
 
 ### Synopsis
 
-EYECRYPT is a tool I created to expedite the process of visualizing encryption on images! 
+EYECRYPT is a tool I created to visualize encryption on images! 
 
 The program supports several image types in addition to BMP, including the most commonly used such as PNG and JPG.
 
@@ -79,7 +74,12 @@ It is intended to be user friendly and not require the user to fiddle with the c
 
 ![](https://github.com/espimyte/eyecrypt/blob/main/assets/eyecrypt-demo.gif?raw=true)
 
-> [!IMPORTANT]  
+The key can be a hexadecimal of any length. You can use the `random` button to generate a random key!
+Using the same key and algorithm on the same image and the same output file type should always produce the same result.
+
+For more advanced users, the `Show non-ECB` checkbox will allow you to select from non-ECB encryption algorithms.
+
+> [!NOTE]  
 > It is reccomended to use smaller, high contrast images if you wish to see more discernable results. Photos, large images, and/or images with a lot of noise tend to produce more obfuscated results.
 
 ### CLI
@@ -89,35 +89,40 @@ The CLI (command line interface) version is a version designed for the command l
 
 This is an option provided for users that for any reason would require/prefer the ability to use EYECRYPT in the command line.
 
+Unlike the GUI version, the CLI version allows you to specify the iv and nonce values, in addition to the key.
+
 The CLI version of EYECRYPT can simply be ran by calling the path to the `eyecrypt.exe` file from the command line.
 
 If you wish to be able to call EYECRYPT from anywhere, you can add the folder that contains the `eyecrypt.exe` file to your `PATH`. If done successfuly, you should be able to run the program from anywhere using `eyecrypt`.
 
-You may require a system restart after adding the program to the path before using it.
+You may require a system restart after adding the program to the `PATH` before using it.
 
-Usage Examples
-```
-$ eyecrypt -in "input.png" -out "output.png"
-$ eyecrypt -in "png-image.png" -out "jpg-image.jpg"
-$ eyecrypt -in "input.png" -out "output.jpg" -algo camellia-128-ecb
-$ eyecrypt -in "input.png" -out "output.jpg" -algo cast5-ecb -key FFD1DC
-$ eyecrypt -in "input.png" -out "output.jpg" -algo aria-128-cfb -iv 111 -key ffa
-```
+#### Usage Examples
+- `eyecrypt -in "input.png" -out "output.png"`
+- `eyecrypt -in "png-image.png" -out "jpg-image.jpg"`
+- `eyecrypt -in "input.png" -out "output.jpg" -algo camellia-128-ecb` specify an algorithm
+- `eyecrypt -in "input.png" -out "output.jpg" -algo cast5-ecb -key FFD1DC` specify a key
+- `eyecrypt -in "input.png" -out "output.jpg" -algo aes-128-cbc -key ffa -iv 111` specify an iv for algorithms that use it
+- `eyecrypt -in "input.png" -out "output.jpg" -algo sm4-ctr -key 99a -nonce a1` specify a nonce for algorithms that use it
+- `eyecrypt -list` print out a list of all supported algorithms
+
 By default, EYECRYPT uses `aes-128-ecb`, with key `0x00000000000000000000000000000000`, and iv/nonce of `0x00000000000000000000000000000000` (if applicable).
+
+Keys, ivs, and nonce values can be any valid hexadecimal.
 
 ## SUPPORTED ALGORITHMS
 
-**ECB** = `aes-128-ecb, aes-192-ecb, aes-256-ecb, camellia-128-ecb, camellia-192-ecb, camellia-256-ecb, seed-ecb, sm4-ecb, cast5-ecb, bf-ecb, idea-ecb, des3-64-ecb`
+**ECB** = `aes-128-ecb, aes-192-ecb, aes-256-ecb, camellia-128-ecb, camellia-192-ecb, camellia-256-ecb, seed-ecb, sm4-ecb, cast5-ecb, bf-ecb, idea-ecb, des3-64-ecb, des3-128-ecb, des3-192-ecb`
 
-**CBC** = `aes-128-cbc, aes-192-cbc, aes-256-cbc, camellia-128-cbc, camellia-192-cbc, camellia-256-cbc, seed-cbc, sm4-cbc, cast5-cbc, bf-cbc, idea-cbc, des-64-cbc`
+**CBC** = `aes-128-cbc, aes-192-cbc, aes-256-cbc, camellia-128-cbc, camellia-192-cbc, camellia-256-cbc, seed-cbc, sm4-cbc, cast5-cbc, bf-cbc, idea-cbc, des-64-cbc, des3-128-cbc, des3-192-cbc`
 
 **CTR** = `aes-128-ctr, aes-192-ctr, aes-256-ctr, camellia-128-ctr, camellia-192-ctr, camellia-256-ctr, sm4-ctr`
 
-**OFB** = `aes-128-ofb, aes-192-ofb, aes-256-ofb, camellia-128-ofb, camellia-192-ofb, camellia-256-ofb, seed-ofb, sm4-ofb, cast5-ofb, bf-ofb, idea-ofb, des3-64-ofb`
+**OFB** = `aes-128-ofb, aes-192-ofb, aes-256-ofb, camellia-128-ofb, camellia-192-ofb, camellia-256-ofb, seed-ofb, sm4-ofb, cast5-ofb, bf-ofb, idea-ofb, des3-64-ofb, des3-128-ofb, des3-192-ofb`
 
-**CFB** = `aes-128-cfb, aes-192-cfb, aes-256-cfb, camellia-128-cfb, camellia-192-cfb, camellia-256-cfb, seed-cfb, sm4-cfb, cast5-cfb, bf-cfb, idea-cfb, des3-64-cfb`
+**CFB** = `aes-128-cfb, aes-192-cfb, aes-256-cfb, camellia-128-cfb, camellia-192-cfb, camellia-256-cfb, seed-cfb, sm4-cfb, cast5-cfb, bf-cfb, idea-cfb, des3-64-cfb, des3-128-cfb, des3-192-cfb`
 
-**OTHER** = `rc4-128`
+**OTHER** = `rc-40, rc4-56, rc4-64, rc4-80, rc4-128, rc4-192, rc4-256`
 
 ## SUPPORTED FILE TYPES
 - PNG `.png`
@@ -126,6 +131,8 @@ By default, EYECRYPT uses `aes-128-ecb`, with key `0x000000000000000000000000000
 - BMP `.bmp`
 - WEBP `.webp`
 - APNG `.apng`
+
+Do note that even if the image is output to APNG, it is unlikely to preserve its animation if it had any.
 
 ## EXAMPLES
 
@@ -157,4 +164,3 @@ Please note that there is no guarantee that this EXIF data is preserved if the i
 
 ### Image Usage
 You are welcome to freely use any of the images that you create using this program. No restrictions and no permission or attribution required, as long as you had rights to the original image.
-
