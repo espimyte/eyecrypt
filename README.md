@@ -47,9 +47,10 @@ And so...
 
 EYECRYPT is a tool I created to visualize encryption on images! 
 
-The program supports several image types in addition to BMP, including the most commonly used such as PNG and JPG.
-
-It also has a feature that allows one to randomize a key, allowing one to quickly experiment with how the key changes the result. 
+- The program supports several image types in addition to BMP (including the most commonly used such as PNG and JPG) and a variety of encryption algorithms.
+- It also has a feature that allows one to randomize a key (a value used for encrypting and decrypting an image), allowing one to quickly experiment with how changing the key changes the result.
+- With the inclusion of other encryption algorithms, you can also experiment with how changing the encryption algorithm changes the result as well.
+- Try experimenting with different key and algorithm combinations!
 
 An image can be encrypted and visualized quickly, without having to convert the images manually, or poke around with the bytes of a file. 
 
@@ -138,11 +139,11 @@ Do note that even if the image is output to APNG, it is unlikely to preserve its
 
 | Original Image  | Result | Parameters |
 | ------------- | ------------- | ------------- |
-| ![](https://github.com/espimyte/eyecrypt/blob/main/assets/example.png?raw=true)  | ![](https://github.com/espimyte/eyecrypt/blob/main/assets/example-result10.png?raw=true)   | **Algorithm:**<br>aes-128-ecb<br><br>**Key:**<br>7c221e585bcfba398c303b59ebc29331<br>|
-| ![](https://github.com/espimyte/eyecrypt/blob/main/assets/example.png?raw=true)  | ![](https://github.com/espimyte/eyecrypt/blob/main/assets/example-result5.png?raw=true)   | **Algorithm:**<br>des-ede<br><br>**Key:**<br>49c94498ada5a0b04f926d8aa76da972<br>|
-| ![](https://github.com/espimyte/eyecrypt/blob/main/assets/rearranger.png?raw=true)  | ![](https://github.com/espimyte/eyecrypt/blob/main/assets/rearranger-result.png?raw=true)   | **Algorithm:**<br> camellia-128-ecb<br><br>**Key:**<br>4ce44843bb9db8ae671708125435628f<br>|
-| ![](https://github.com/espimyte/eyecrypt/blob/main/assets/vacuum.png?raw=true)  | ![](https://github.com/espimyte/eyecrypt/blob/main/assets/vacuum-result.png?raw=true)   | **Algorithm:**<br> des-ede<br><br>**Key:**<br>3299d0c42940bd851c7ab03f3e7f7637<br>|
-| ![](https://github.com/espimyte/eyecrypt/blob/main/assets/izzy.png?raw=true)  | ![](https://github.com/espimyte/eyecrypt/blob/main/assets/izzy-result.png?raw=true)   | **Algorithm:**<br>aria-256-ecb<br><br>**Key:**<br> ff9ecd0e5a3865c4df8c40afef0bfbc1<br>|
+| ![](https://github.com/espimyte/eyecrypt/blob/main/assets/example.png?raw=true)  | ![](https://github.com/espimyte/eyecrypt/blob/main/assets/example-result1.png?raw=true)   | **Algorithm:**<br>aes-128-ecb<br><br>**Key:**<br>7b36c46f46f7d4b996f6a153449b0ff1<br>|
+| ![](https://github.com/espimyte/eyecrypt/blob/main/assets/example.png?raw=true)  | ![](https://github.com/espimyte/eyecrypt/blob/main/assets/example-result2.png?raw=true)   | **Algorithm:**<br>aes-128-ecb<br><br>**Key:**<br>9d836673949da1c27c07c80d26026614<br>|
+| ![](https://github.com/espimyte/eyecrypt/blob/main/assets/rearranger.png?raw=true)  | ![](https://github.com/espimyte/eyecrypt/blob/main/assets/rearranger-result.png?raw=true)   | **Algorithm:**<br> cast5-ecb<br><br>**Key:**<br>231e217c1fdc03c85fede5c0e12ea010<br>|
+| ![](https://github.com/espimyte/eyecrypt/blob/main/assets/vacuum.png?raw=true)  | ![](https://github.com/espimyte/eyecrypt/blob/main/assets/vacuum-result.png?raw=true)   | **Algorithm:**<br> bf-ecb<br><br>**Key:**<br>231e217c1fdc03c85fede5c0e12ea010<br>|
+| ![](https://github.com/espimyte/eyecrypt/blob/main/assets/izzy.png?raw=true)  | ![](https://github.com/espimyte/eyecrypt/blob/main/assets/izzy-result.png?raw=true)   | **Algorithm:**<br>sm4-ecb<br><br>**Key:**<br> 28db7fec544231dc31520b7978feaacb<br>|
 
 
 ## ADDITIONAL NOTES
