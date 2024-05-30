@@ -145,7 +145,7 @@ def main():
             if (not is_valid_hex(key.get())):
                 raise Exception("Please enter a valid key.")
 
-            thread = RaiseThread(target = eyecrypt, kwargs={'input_file_path': input.file_path, 'output_file_path': output.file_path, 'algo': algorithm.get(), 'key': key.get(), 'iv': defaults.IV, 'log_action': write_action, 'log': log})
+            thread = RaiseThread(target = eyecrypt, kwargs={'input_image_path': input.file_path, 'output_image_path': output.file_path, 'algo': algorithm.get(), 'key': key.get(), 'iv': defaults.IV, 'log_action': write_action, 'log': log})
             thread.daemon = True
             time_started = time.time()
             thread.start()
