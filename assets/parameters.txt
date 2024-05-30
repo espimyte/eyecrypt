@@ -1,5 +1,6 @@
 example-result1.png (algorithm: aes-128-ecb, key: 7b36c46f46f7d4b996f6a153449b0ff1)
 example-result2.png (algorithm: aes-128-ecb, key: 9d836673949da1c27c07c80d26026614)
+blossom-result.png (algorithm: idea-ecb, key: 89ce9df4007f31d9b595801a0a23f57c)
 rearranger-result.png (algorithm: cast5-ecb, key: 231e217c1fdc03c85fede5c0e12ea010)
 vacuum-result.png (algorithm: bf-ecb, key: 231e217c1fdc03c85fede5c0e12ea010)
 izzy-result.png (algorithm: sm4-ecb, key: 28db7fec544231dc31520b7978feaacb)
