@@ -9,9 +9,7 @@ Press `GO!`, and EYECRYPT will encrypt the image and save the result to the file
 The key can be a hexadecimal of any length. You can use the random button to generate a random key!
 Using the same key and algorithm on the same image and the same output file type should always produce the same result.
 
-For more advanced users, the `Show non-ECB` checkbox will allow you to select from non-ECB encryption algorithms.
-
-NOTE: It is reccomended to use smaller, high contrast images if you wish to see more discernable results. Photos, large images, and/or images with a lot of noise tend to produce more obfuscated results.
+For more advanced options, the `Show non-ECB` checkbox will allow you to select from non-ECB encryption algorithms.
 
 ---
 
