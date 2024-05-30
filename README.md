@@ -83,7 +83,7 @@ Using the same key and algorithm on the same image and the same output file type
 For more advanced users, the `Show non-ECB` checkbox will allow you to select from non-ECB encryption algorithms.
 
 > [!NOTE]  
-> It is reccomended to use smaller, high contrast images if you wish to see more discernable results. Photos, large images, and/or images with a lot of noise tend to produce more obfuscated results.
+> It is reccomended to use smaller, high contrast images if you wish to see more discernable results. Photos, large images, and/or images with a lot of noise tend to produce more obfuscated results...though there are exceptions!
 
 ### CLI
 <img src="https://github.com/espimyte/eyecrypt/blob/main/assets/eyecrypt-cli-icon.png?raw=true" style="width: 50px; image-rendering: pixelated"></img>
