@@ -15,7 +15,7 @@ def print_action(action, args):
     """
     Prints the current action to stdout.
     """
-    print("\033[94m{}\033[00m".format(action))
+    print("{}".format(action))
 
 def print_warning(warning):
     """
@@ -93,7 +93,7 @@ def main():
 
     eyecrypt(input_image_path = input_image_path, output_image_path = output_image_path, algo = algo, key = key, iv = iv, nonce = nonce, log_action = print_action)
 
-    print("\033[92m{}\033[00m".format("Finished! (Saved to "+output_image_path+")"))
+    print("{}".format("Finished! (Saved to "+output_image_path+")"))
     return
 
 main()
