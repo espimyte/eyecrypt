@@ -5,8 +5,6 @@ A tool that visualizes encryption in images.
 
 ## Table of Contents
 - [OVERVIEW](#OVERVIEW)
-  - [Background](#Background)
-  - [Synopsis](#Synopsis) 
 - [INSTALLATION](#INSTALLATION)
 - [USAGE](#USAGE)
   - [GUI](#GUI)
@@ -22,39 +20,19 @@ A tool that visualizes encryption in images.
 
 ## OVERVIEW
 
-### Background
-EYECRYPT is a program that is inspired by the following image, which I found on the [wikipedia page on block cipher encryption](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation) in 2021, demonstrating how ECB encryption fails to properly obfuscate data, in contrast to other encryption methods.
+EYECRYPT is a tool I created to visualize encryption on images!
+This program that is inspired by the following image (also known as the ECB penguin), which demonstrates how ECB encryption fails to properly obfuscate data, in contrast to other encryption methods.
 
 ![](https://i.imgur.com/Z896Mym.png)
 
-I thought that the effect produced by the faulty encryption method was fascinating, and so I sought out to find a way to do it myself.
-
-When images are encrypted, they cannot be read as images anymore. So something must be done to the image after it is encrypted in order for it to be read as an image.
-
-After some research, I was able to learn about how this effect is achieved, and I managed to successfully reproduce the effect myself.
-
-You can learn more yourself [here](https://words.filippo.io/the-ecb-penguin/) and [here](https://samsclass.info/seminars/image-ECB.html).
-
-Below is an image that I created to help me remember the process.
-
-![](https://github.com/espimyte/eyecrypt/blob/main/assets/process.png?raw=true)
-
-Of course, I was estatic about the result. I wanted to see more! 
-
-And so...
-
-### Synopsis
-
-EYECRYPT is a tool I created to visualize encryption on images! 
+The program allows you to reproduce this effect on any image of your choosing.
 
 - The program supports several image types in addition to BMP (including the most commonly used such as PNG and JPG) and a variety of encryption algorithms.
 - It also has a feature that allows one to randomize a key (a value used for encrypting and decrypting an image), allowing one to quickly experiment with how changing the key changes the result.
 - With the inclusion of other encryption algorithms, you can also experiment with how changing the encryption algorithm changes the result as well.
 - Try experimenting with different key and algorithm combinations!
 
-An image can be encrypted and visualized quickly, without having to convert the images manually, or poke around with the bytes of a file. 
-
-The intention of this program is not only to expedite the process, but to introduce this effect to others who may not be as knowledgeable in modes of encryption, and allow others to experiment with images and encryption themselves.
+The intention of this program is to introduce this effect to others who may not be as knowledgeable in modes of encryption, and allow others to experiment with images and encryption themselves.
 
 I think the effect that these encryption methods perform on images is very beautiful, and I want to share this beauty with others. I hope you can find it as fascinating and wonderful as I do.
 
