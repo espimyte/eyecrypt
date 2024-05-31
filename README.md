@@ -27,7 +27,7 @@ This program that is inspired by the following image (also known as the ECB peng
 
 The program allows you to reproduce this effect on any image of your choosing.
 
-- The program supports several image types in addition to BMP (including the most commonly used such as PNG and JPG) and a variety of encryption algorithms.
+- The program supports several image types (including the most commonly used such as PNG and JPG) and a variety of encryption algorithms.
 - It also has a feature that allows one to randomize a key (a value used for encrypting and decrypting an image), allowing one to quickly experiment with how changing the key changes the result.
 - With the inclusion of other encryption algorithms, you can also experiment with how changing the encryption algorithm changes the result as well.
 - Try experimenting with different key and algorithm combinations!
