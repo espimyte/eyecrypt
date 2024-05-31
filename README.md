@@ -32,8 +32,6 @@ The program allows you to reproduce this effect on any image of your choosing.
 - With the inclusion of other encryption algorithms, you can also experiment with how changing the encryption algorithm changes the result as well.
 - Try experimenting with different key and algorithm combinations!
 
-The intention of this program is to introduce this effect to others who may not be as knowledgeable in modes of encryption, and allow others to experiment with images and encryption themselves.
-
 I think the effect that these encryption methods perform on images is very beautiful, and I want to share this beauty with others. I hope you can find it as fascinating and wonderful as I do.
 
 While this ECB encryption method may be "faulty" and "insecure", perhaps it is true that flaws are what make us beautiful.
