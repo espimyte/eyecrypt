@@ -34,7 +34,7 @@ The program allows you to reproduce this effect on any image of your choosing.
 
 I think the effect that these encryption methods perform on images is very beautiful, and I want to share this beauty with others. I hope you can find it as fascinating and wonderful as I do.
 
-While this ECB encryption method may be "faulty" and "insecure", perhaps it is true that flaws are what make us beautiful.
+While this ECB encryption method may be "flawed" and "insecure", perhaps it is true that flaws are what make us beautiful.
 
 ## INSTALLATION
 Simply run `EYECRYPT.exe`! No external installations required.
