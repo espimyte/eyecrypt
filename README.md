@@ -1,7 +1,7 @@
 # EYECRYPT
 ![](https://github.com/espimyte/eyecrypt/blob/main/assets/eyecrypt-icon.png?raw=true)
 
-An tool that visualizes encryption in images.
+A tool that visualizes encryption in images.
 
 ## Table of Contents
 - [OVERVIEW](#OVERVIEW)
