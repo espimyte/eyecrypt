@@ -1,7 +1,7 @@
 # EYECRYPT
 ![](https://github.com/espimyte/eyecrypt/blob/main/assets/eyecrypt-icon.png?raw=true)
 
-An image mutation tool that visualizes encryption in images.
+An tool that visualizes encryption in images.
 
 ## Table of Contents
 - [OVERVIEW](#OVERVIEW)
