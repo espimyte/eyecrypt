@@ -21,7 +21,7 @@ An image mutation tool that visualizes encryption in images.
 ## OVERVIEW
 
 EYECRYPT is a tool I created to visualize encryption on images!
-This program that is inspired by the following image (also known as the ECB penguin), which demonstrates how ECB encryption fails to properly obfuscate data, in contrast to other encryption methods.
+This program is inspired by the following image (also known as the ECB penguin), which demonstrates how ECB encryption fails to properly obfuscate data, in contrast to other encryption methods.
 
 ![](https://i.imgur.com/Z896Mym.png)
 
