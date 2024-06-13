@@ -2,17 +2,6 @@
 
 import os
 import sys
-import win32process
-import win32.win32gui as win32gui
-import win32.lib.win32con as win32con
-
-console_window = win32gui.GetForegroundWindow()
-focus_window_pid = win32process.GetWindowThreadProcessId(console_window)[1]
-current_process_pid = os.getppid()
-
-if focus_window_pid == current_process_pid:
-    win32gui.ShowWindow(console_window , win32con.SW_HIDE)
-    pass
 
 current = os.path.dirname(os.path.realpath(__file__))
 parent = os.path.dirname(current)
