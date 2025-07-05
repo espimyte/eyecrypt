@@ -4,7 +4,7 @@
 A tool that visualizes encryption in images.
 
 ### [DOWNLOAD HERE](https://github.com/espimyte/eyecrypt/releases/tag/v1.0.0)
-
+### [IN-BROWSER VERSION](https://espy.world/eyecrypt)
 
 ## Table of Contents
 - [OVERVIEW](#OVERVIEW)
